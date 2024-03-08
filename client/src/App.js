@@ -1,20 +1,28 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import { supabase } from './supabaseClient'
 
 function App() {
+  const [session, setSession] = useState();
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8000/message")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message));
-  }, []);
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
+    })
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, [])
 
 
-  
+
   return (
     <div className="App">
-      <h1>{message}</h1>
+      {!session ? <Home /> : <Dashboard session={session} />}
     </div>
   );
 }
