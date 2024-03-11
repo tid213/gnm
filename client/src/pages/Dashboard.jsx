@@ -3,24 +3,28 @@ import { supabase } from '../supabaseClient'
 
 function Dashboard ({session}) {
 
-    const [message, setMessage] = useState("");
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [weatherForecast, setWeatherForecast] = useState();
 
     useEffect(() => {
-    
-      fetch("http://localhost:8000/message")
+      fetch("http://localhost:8000/weather/85296")
         .then((res) => res.json())
-        .then((data) => setMessage(data.message));
+        .then((data) => setWeatherForecast(data.weather));
     }, []);
 
-    console.log(session)
     return(
         <div>
             <h1>Signed In</h1>
-            <p>{message}</p>
+            {weatherForecast?.map(function(weather){
+                return(
+                    <div key={weather.number}>
+                        <p>{weather.name}</p>
+                        <p>{weather.temperature}</p>
+                    </div>
+                )
+            })}
             <div onClick={() => supabase.auth.signOut()}><p>Sign out</p></div>
         </div>
     )
 }
 
-export default Dashboard;
+export default React.memo(Dashboard);
