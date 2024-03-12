@@ -11,6 +11,7 @@ function Dashboard ({session}) {
         .then((data) => setWeatherForecast(data.weather));
     }, []);
 
+    console.log(session)
     return(
         <div>
             <h1>Signed In</h1>
