@@ -19,9 +19,11 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+
 app.get('/message', (req, res) => {
     res.json({ message: "Hello from server!" });
 });
+
 
 // Middleware to verify Supabase authentication token
 const verifySupabaseToken = async (req, res, next) => {
@@ -33,13 +35,13 @@ const verifySupabaseToken = async (req, res, next) => {
   
     try {
       // Verify and decode the token using Supabase
-      const { data, error } = await supabase.auth.api.getUser(token.replace('Bearer ', ''));
-  
+      const { data, error } = await supabase.auth.getUser(token.replace('Bearer ', ''));
+
       if (error || !data) {
         return res.status(401).json({ error: 'Unauthorized: Invalid token' });
       }
-  
-      // Store user information in the request for further use if needed
+    
+      // If user is authenticated, you can proceed with the request
       req.user = data;
       next();
     } catch (error) {
@@ -74,7 +76,8 @@ const getWeatherData = async (latitude, longitude) => {
   return weatherForecastJson.properties.periods;
 };
 
-app.get('/weather/:zip', async (req, res) => {
+
+app.get('/weather/:zip', verifySupabaseToken,  async (req, res) => {
     try {
         const zipCode = req.params.zip;
         const locationResponse = await fetchJSON(`https://geocode.maps.co/search?q=${zipCode}&api_key=658b4b5356c79640180577zjhde4e6a`);
