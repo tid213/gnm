@@ -2,11 +2,12 @@ import React, { useState, useEffect, Profiler } from "react";
 import "./App.css";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
-import { supabase } from './supabaseClient'
+import NoteBook from "./pages/NoteBook";
+import { supabase } from './supabaseClient';
+import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
 
 function App() {
   const [session, setSession] = useState();
-  const [message, setMessage] = useState("");
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -20,7 +21,13 @@ function App() {
 
   return (
     <div className="App">
-      {!session ? <Home /> : <Dashboard session={session} />}
+      <Router>
+        <Routes>
+          <Route path="/" exact element={!session ? <Home /> : <Dashboard session={session} />}/>
+          <Route path="/notebook/:id" element={<NoteBook />} />
+        </Routes>
+      </Router>
+      
     </div>
   );
 }

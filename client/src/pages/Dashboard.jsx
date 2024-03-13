@@ -8,10 +8,10 @@ function Dashboard ({session}) {
     useEffect(() => {
       fetchData()
     }, []);
-    
+
     const fetchData = async () => {
         try {
-          const token = session.access_token; // Replace with your actual Supabase authentication token
+          const token = session.access_token;
       
           const response = await fetch('http://localhost:8000/weather/85296', {
             method: 'GET',
@@ -24,7 +24,6 @@ function Dashboard ({session}) {
           if (response.ok) {
             const data = await response.json();
             setWeatherForecast(data.weather)
-            console.log('Data from protected route:', data);
           } else {
             console.error('Request failed:', response.statusText);
           }
@@ -32,12 +31,7 @@ function Dashboard ({session}) {
           console.error('Error:', error);
         }
       };
-      
-      // Call the function to fetch data with the Supabase authentication token
-      //fetchData();
-      
 
-    console.log(session)
     return(
         <div>
             <h1>Signed In</h1>

@@ -43,6 +43,7 @@ const verifySupabaseToken = async (req, res, next) => {
     
       // If user is authenticated, you can proceed with the request
       req.user = data;
+      console.log(data)
       next();
     } catch (error) {
       console.error('Error verifying Supabase token:', error);
@@ -91,6 +92,10 @@ app.get('/weather/:zip', verifySupabaseToken,  async (req, res) => {
         console.error('Error fetching weather data:', error);
         res.status(500).json({ error: 'Internal Server Error' });
       }
+})
+
+app.get('/notebook/:id', async (req, res) => {
+    res.json({data: "API call works"})
 })
 
 app.listen(8000, () => {
