@@ -27,7 +27,6 @@ function App() {
           <Route path="/notebook/:id" element={<NoteBook />} />
         </Routes>
       </Router>
-      
     </div>
   );
 }

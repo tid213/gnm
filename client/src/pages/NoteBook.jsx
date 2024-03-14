@@ -8,7 +8,7 @@ function NoteBook(){
         const fetchData = async () => {
             try {
           
-              const response = await fetch('http://localhost:8000/notebook/85296', {
+              const response = await fetch('http://localhost:8000/notebook/42069', {
                 method: 'GET',
                 headers: {
                   'Content-Type': 'application/json'
@@ -25,12 +25,20 @@ function NoteBook(){
               console.error('Error:', error);
             }
         };
-        
+
         fetchData()
     }, [])
 
     return(
-        <div>{message}</div>
+        <div>
+            {message?.map(function(plant, index){
+                return(
+                    <div key={index}>
+                        <p>{plant.plant_name}</p>
+                    </div>
+                )
+            })}
+        </div>
     )
 }
 

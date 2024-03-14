@@ -94,9 +94,73 @@ app.get('/weather/:zip', verifySupabaseToken,  async (req, res) => {
       }
 })
 
+/* Public NoteBook functions and API */
+
+const fetchUserId = async (shareId) => {
+    try {
+        const { data, error } = await supabase
+          .from('notebooks')
+          .select('user_id')
+          .eq('share_link', shareId)
+      
+        if (error) {
+          // Log the actual error message returned by Supabase
+          console.error('Error querying Supabase:', error.message);
+          throw new Error('Error querying Supabase');
+        }
+      
+        if (!data) {
+          console.log("No Notebook")
+        }
+      
+        return data
+
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
+};
+
+const fetchUserPlants = async (userId) => {
+    try {
+        const { data, error } = await supabase
+          .from('plants')
+          .select('plant_name, plant_image')
+          .eq('user_id', userId);
+      
+        if (error) {
+          console.error('Error querying Supabase:', error.message);
+          throw new Error('Error querying Supabase');
+        }
+      
+        if (!data || data.length === 0) {
+          console.log("No plants found for user:", userId);
+          return []; // or any other appropriate response
+        }
+      
+        return data;
+      } catch (error) {
+        console.error('Error:', error.message);
+        throw new Error('Internal Server Error');
+      }
+};
+
+const fetchUsernotes = async (userId) => {
+
+};
+
 app.get('/notebook/:id', async (req, res) => {
-    res.json({data: "API call works"})
-})
+    const shareId = req.params.id;
+    const getUserId = await fetchUserId(shareId);
+    const userId = getUserId[0].user_id;
+    const plantData = await fetchUserPlants(userId);
+
+    if(plantData){
+        res.json({data: plantData})
+    } else{
+        res.json({data: "API call works no data"})
+    }
+
+});
 
 app.listen(8000, () => {
     console.log(`Server is running on port 8000.`);
