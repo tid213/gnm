@@ -3,6 +3,7 @@ import "./App.css";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import NoteBook from "./pages/NoteBook";
+import NotFoundPage from "./pages/NotFoundPage";
 import { supabase } from './supabaseClient';
 import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
 
@@ -25,6 +26,7 @@ function App() {
         <Routes>
           <Route path="/" exact element={!session ? <Home /> : <Dashboard session={session} />}/>
           <Route path="/notebook/:id" element={<NoteBook />} />
+          <Route path='*' element={<NotFoundPage />}/>
         </Routes>
       </Router>
     </div>

@@ -9,6 +9,8 @@ function Dashboard ({session}) {
     const [noteData, setNoteData] = useState();
     const [formView, setFormView] = useState(false);
 
+    console.log(session)
+
     return(
         <div>
             <h1>Signed In</h1>
