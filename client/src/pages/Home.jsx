@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import { supabase } from '../supabaseClient'
 
 function Home () {
 
-    const googleSignIn = async (event) => {
+    const handleGoogleSignIn = async (event) => {
         event.preventDefault();
         const { data, error } = await supabase.auth.signInWithOAuth({
           provider: 'google',
@@ -11,7 +12,11 @@ function Home () {
       }
 
     return(
-        <div onClick={googleSignIn}><p>Sign in</p></div>
+        <div>
+            <Link to="/signin">Sign In</Link>
+            <Link to="/signup">Sign Up</Link>
+        </div>
+        
     )
 
 

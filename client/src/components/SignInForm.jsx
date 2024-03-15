@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
 import { supabase } from '../supabaseClient';
 
-const SignUpForm = () => {
+const SignInForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { user, error } = await supabase.auth.signUp({
+      const { user, error } = await supabase.auth.signIn({
         email,
         password,
       });
       if (error) {
         throw error;
       }
-      setMessage('Sign up successful. Please check your email for verification.');
+      setMessage('Sign in successful.');
     } catch (error) {
-      setMessage('Error signing up. Please try again.');
-      console.error('Error signing up:', error.message);
+      setMessage('Error signing in. Please try again.');
+      console.error('Error signing in:', error.message);
     }
     setLoading(false);
   };
@@ -35,8 +35,8 @@ const SignUpForm = () => {
 
   return (
     <div>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
+      <h2>Sign In</h2>
+      <form onSubmit={handleSignIn}>
         <div>
           <label>Email:</label>
           <input
@@ -55,7 +55,7 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <button type="submit" disabled={loading}>Sign Up</button>
+        <button type="submit" disabled={loading}>Sign In</button>
       </form>
       <button onClick={handleGoogleSignIn}>Sign in with Google</button>
       {message && <p>{message}</p>}
@@ -63,4 +63,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default SignInForm;
