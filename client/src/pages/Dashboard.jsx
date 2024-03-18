@@ -33,8 +33,11 @@ function Dashboard ({session}) {
               throw error;
             }
             if(data[0].username != null){
-                setFullyRegistered(true)
-                setRegCheck(false)
+                setTimeout(function(){
+                    setFullyRegistered(true)
+                    setRegCheck(false)
+                }, 1000)
+                
             }
 
             setUserInfo(data || []);
@@ -108,7 +111,7 @@ function Dashboard ({session}) {
     if(fullyRegistered===false){
         return(
             <div>
-                {regCheck ? (<p>getting user info...</p>):(<AccountForm session={session}/>)}
+                {regCheck ? (<p>gathering user info...</p>):(<AccountForm session={session}/>)}
             </div>
         )
     } else{
