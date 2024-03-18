@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from '../supabaseClient'
+import AccountForm from "../components/AccountForm";
 
 function Dashboard ({session}) {
 
     const [loading, setLoading] = useState(true);
+    const [fullyRegistered, setFullyRegistered] = useState(false);
+    const [regCheck, setRegCheck] = useState(true);
     const [userInfo, setUserInfo] = useState();
     const [loadingUserInfo, setLoadingUserInfo] = useState(true);
     const [plantData, setPlantData] = useState();
@@ -29,7 +32,11 @@ function Dashboard ({session}) {
             if (error) {
               throw error;
             }
-            
+            if(data[0].username != null){
+                setFullyRegistered(true)
+                setRegCheck(false)
+            }
+
             setUserInfo(data || []);
             setLoadingUserInfo(false);
           } catch (error) {
@@ -98,13 +105,21 @@ function Dashboard ({session}) {
           }
     };
 
-    return(
-        <div>
-            <h1>Signed In as:</h1>
-            {loadingUserInfo ? (<p>Loading...</p>):(<p>{userInfo[0].username}</p>)}
-            <div onClick={() => supabase.auth.signOut()}><p>Sign out</p></div>
-        </div>
-    )
+    if(fullyRegistered===false){
+        return(
+            <div>
+                {regCheck ? (<p>getting user info...</p>):(<AccountForm session={session}/>)}
+            </div>
+        )
+    } else{
+        return(
+            <div>
+                <h1>Signed In as:</h1>
+                {loadingUserInfo ? (<p>Loading...</p>):(<p>{userInfo[0].username}</p>)}
+                <div onClick={() => supabase.auth.signOut()}><p>Sign out</p></div>
+            </div>
+        )
+    }
 }
 
 export default React.memo(Dashboard);

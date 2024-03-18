@@ -5,6 +5,8 @@ function SignIn(){
     return(
         <div>
             <SignInForm />
+            <Link to="/forgotpassword">Forgot password?</Link>
+            <br/>
             <Link to="/">Go back to Home</Link>
         </div>
     )
