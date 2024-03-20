@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Profiler } from "react";
+import { Navigate } from 'react-router-dom';
 import "./App.css";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
@@ -20,7 +21,7 @@ function App() {
     })
 
     supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
+      setSession(session);
     })
   }, [])
 
@@ -33,7 +34,7 @@ function App() {
           <Route path='/signin' element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
-          <Route path="/changepassword/:id" element={<ChangePassword />} />
+          <Route path="/changepassword" element={ <ChangePassword session={session}/>} />
           <Route path='*' element={<NotFoundPage />}/>
         </Routes>
       </Router>

@@ -10,11 +10,13 @@ const ForgotPassword = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { error } = await supabase.auth.api.resetPasswordForEmail(email);
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'http://localhost:3000/changepassword',
+      });
       if (error) {
         throw error;
       }
-      setMessage('Password reset email sent. Please check your inbox.');
+      setMessage('Password reset email sent. Please check your inbox. You can close this tab.');
     } catch (error) {
       setMessage('Error sending password reset email. Please try again.');
       console.error('Error sending password reset email:', error.message);

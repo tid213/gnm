@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from '../supabaseClient'
 import AccountForm from "../components/AccountForm";
+import PlantForm from "../components/PlantForm";
+import PlotForm from "../components/PlotForm";
+import NoteForm from "../components/NoteForm";
 
 function Dashboard ({session}) {
 
@@ -19,6 +22,7 @@ function Dashboard ({session}) {
 
     useEffect(()=>{
         fetchUserInfo();
+        console.log(session)
     }, [])
 
     const fetchUserInfo = async () => {
@@ -108,6 +112,28 @@ function Dashboard ({session}) {
           }
     };
 
+    const closeButton = (data) => {
+        if(data === true){
+            setFormView("")
+        }
+    }
+
+    const editButton = (data) => {
+        if(data){
+            setFormView("edit " + data)
+        }
+    }
+
+    const viewContainer = () => {
+        if(formView === "add plant" || formView === "edit plant"){
+            return(<PlantForm session={session} closeButton={closeButton} />)
+        } else if(formView === "add note"){
+            return(<NoteForm session={session} closeButton={closeButton} />)
+        } else if(formView === "add plot"){
+            return(<PlotForm session={session} closeButton={closeButton} />)
+        }
+    }
+
     if(fullyRegistered===false){
         return(
             <div>
@@ -119,6 +145,10 @@ function Dashboard ({session}) {
             <div>
                 <h1>Signed In as:</h1>
                 {loadingUserInfo ? (<p>Loading...</p>):(<p>{userInfo[0].username}</p>)}
+                {viewContainer()}
+                <div onClick={()=> setFormView("add plant")}><p>Add Plant</p></div>
+                <div onClick={()=> setFormView("add plot")}><p>Add Plot</p></div>
+                <div onClick={()=> setFormView("add note")}><p>Add Note</p></div>
                 <div onClick={() => supabase.auth.signOut()}><p>Sign out</p></div>
             </div>
         )
