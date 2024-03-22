@@ -35,14 +35,14 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-20 p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700">Email:</label>
           <input
             type="email"
-            className="w-full px-4 py-2 border rounded-md bg-gray-100 focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -52,7 +52,7 @@ const SignUpForm = () => {
           <label className="block text-gray-700">Password:</label>
           <input
             type="password"
-            className="w-full px-4 py-2 border rounded-md bg-gray-100 focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -60,24 +60,24 @@ const SignUpForm = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-customDarkGreen hover:bg-customBrown text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
+          className="w-full bg-lime-600 hover:bg-lime-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
           disabled={loading}
         >
           {loading ? 'Signing Up...' : 'Sign Up'}
         </button>
       </form>
       <button
-        className="mt-4 w-full bg-customDarkGreen hover:bg-customBrown text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
+        className="mt-4 w-full bg-lime-600 hover:bg-lime-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
         onClick={handleGoogleSignIn}
       >
         Sign in with Google
       </button>
       {message && <p className="mt-4 text-red-500">{message}</p>}
       <div className="mt-4 text-center">
-        <Link to="/signin" className="text-blue-500 hover:text-blue-700">Already signed up? Sign in</Link>
+        <Link to="/signin" className="text-green-800 hover:text-green-600">Already signed up? Sign in</Link>
       </div>
       <div className="mt-2 text-center">
-        <Link to="/" className="text-blue-500 hover:text-blue-700">Go back to Home</Link>
+        <Link to="/" className="text-green-800 hover:text-green-600">Go back to Home</Link>
       </div>
     </div>
   );

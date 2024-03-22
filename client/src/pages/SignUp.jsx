@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 
 function SignUp(){
     return(
-        <div>
-            <SignUpForm />
+        <div className="min-h-screen bg-lime-100 flex items-center justify-center">
+            <div className="max-w-md w-full"><SignUpForm /></div>
+            
         </div>
     )
 }

@@ -4,11 +4,9 @@ import { Link } from 'react-router-dom';
 
 function SignIn(){
     return(
-        <div>
-            <SignInForm />
-            <Link to="/forgotpassword">Forgot password?</Link>
-            <br/>
-            <Link to="/">Go back to Home</Link>
+        <div className="min-h-screen bg-lime-100 flex items-center justify-center">
+            <div className="max-w-md w-full"><SignInForm /></div>
+            
         </div>
     )
 }
