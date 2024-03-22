@@ -5,8 +5,6 @@ function SignUp(){
     return(
         <div>
             <SignUpForm />
-            <Link to="/signin">Already signed up? Sign in</Link>
-            <Link to="/">Go back to Home</Link>
         </div>
     )
 }
