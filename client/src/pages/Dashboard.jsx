@@ -4,6 +4,7 @@ import AccountForm from "../components/AccountForm";
 import PlantForm from "../components/PlantForm";
 import PlotForm from "../components/PlotForm";
 import NoteForm from "../components/NoteForm";
+import loadingImg from '../images/bouncing-circles.svg';
 
 function Dashboard ({session}) {
 
@@ -136,13 +137,13 @@ function Dashboard ({session}) {
 
     if(fullyRegistered===false){
         return(
-            <div>
-                {regCheck ? (<p>gathering user info...</p>):(<AccountForm session={session}/>)}
+            <div className="bg-lime-100">
+                {regCheck ? (<img src={loadingImg}></img>):(<AccountForm session={session}/>)}
             </div>
         )
     } else{
         return(
-            <div>
+            <div className="bg-lime-100">
                 <h1>Signed In as:</h1>
                 {loadingUserInfo ? (<p>Loading...</p>):(<p>{userInfo[0].username}</p>)}
                 {viewContainer()}
