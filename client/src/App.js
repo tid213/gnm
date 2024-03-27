@@ -29,12 +29,13 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" exact element={!session ? <Home /> : <Dashboard session={session} />}/>
-          <Route path="/notebook/:id" element={<NoteBook />} />
-          <Route path='/signin' element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/" exact element={!session ? <Home /> : <Navigate to="/dashboard" />}/>
+          <Route path="/dashboard" element={session ? <Dashboard session={session} /> : <Navigate to="/" />} />
+          <Route path='/signin' element={!session ? <SignIn /> : <Navigate to="/dashboard" />} />
+          <Route path="/signup" element={!session ? <SignUp /> : <Navigate to="/dashboard" />} />
+          <Route path="/forgotpassword" element={!session ? <ForgotPassword /> : <Navigate to="/dashboard" />} />
           <Route path="/changepassword" element={ <ChangePassword session={session}/>} />
+          <Route path="/notebook/:id" element={<NoteBook />} />
           <Route path='*' element={<NotFoundPage />}/>
         </Routes>
       </Router>

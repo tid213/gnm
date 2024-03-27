@@ -5,9 +5,11 @@ import PlantForm from "../components/PlantForm";
 import PlotForm from "../components/PlotForm";
 import NoteForm from "../components/NoteForm";
 import loadingImg from '../images/bouncing-circles.svg';
+import { useNavigate } from "react-router-dom";
 
 function Dashboard ({session}) {
 
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [fullyRegistered, setFullyRegistered] = useState(false);
     const [regCheck, setRegCheck] = useState(true);
@@ -41,7 +43,7 @@ function Dashboard ({session}) {
                 setTimeout(function(){
                     setFullyRegistered(true)
                     setRegCheck(false)
-                }, 1000)
+                }, 2000)
                 
             }
 
@@ -135,22 +137,30 @@ function Dashboard ({session}) {
         }
     }
 
+    const handleSignOut = async () => {
+        // Sign out the user
+        await supabase.auth.signOut();
+    
+        // Redirect to the home page
+        navigate('/');
+      };
+
     if(fullyRegistered===false){
         return(
-            <div className="bg-lime-100">
-                {regCheck ? (<img src={loadingImg}></img>):(<AccountForm session={session}/>)}
+            <div className="min-h-screen flex flex-col justify-center items-center bg-lime-100">
+                {regCheck ? (<img src={loadingImg} className="w-16 h-16"></img>):(<AccountForm session={session}/>)}
             </div>
         )
     } else{
         return(
-            <div className="bg-lime-100">
+            <div className="min-h-screen flex flex-col justify-center items-center bg-lime-100">
                 <h1>Signed In as:</h1>
                 {loadingUserInfo ? (<p>Loading...</p>):(<p>{userInfo[0].username}</p>)}
                 {viewContainer()}
                 <div onClick={()=> setFormView("add plant")}><p>Add Plant</p></div>
                 <div onClick={()=> setFormView("add plot")}><p>Add Plot</p></div>
                 <div onClick={()=> setFormView("add note")}><p>Add Note</p></div>
-                <div onClick={() => supabase.auth.signOut()}><p>Sign out</p></div>
+                <div onClick={() => handleSignOut()}><p>Sign out</p></div>
             </div>
         )
     }
