@@ -71,44 +71,44 @@ const PlotForm = ({ plotId, session, closeButton }) => {
   };
 
   return (
-    <div>
+    <div className='w-full max-w-sm md:max-w-md mx-auto p-6 bg-white rounded-lg shadow-md'>
       <div onClick={()=> closeButton(true)}><a>Close</a></div>
-      <h2>Add/Edit Plot</h2>
+      <h2 className='text-2xl font-semibold mb-4'>
+        {plotId ? "Edit Plot" : "Add Plot"}
+      </h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+        <div className='mb-4'>
+          <label className='block text-gray-700'>Name:</label>
+          <input type="text" value={name} 
+          className="w-full px-4 py-2 border rounded-md bg-lime-50 focus:outline-none focus:border-lime-500"
+          onChange={(e) => setName(e.target.value)} required />
         </div>
-        <div>
-          <label>Sun Type:</label>
-          <select value={sunType} onChange={(e) => setSunType(e.target.value)}>
+        <div className='mb-4'>
+          <label className='block text-gray-700'>Sun Type:</label>
+          <select value={sunType} 
+          className="w-full px-4 py-2 border rounded-md bg-lime-50 focus:outline-none focus:border-lime-500"
+          onChange={(e) => setSunType(e.target.value)}>
             <option value="Full Sun">Full Sun</option>
             <option value="Part Sun">Part Sun</option>
             <option value="Part Shade">Part Shade</option>
             <option value="Full Shade">Full Shade</option>
           </select>
         </div>
-        <div>
-          <label>Soil Type:</label>
-          <input type="text" value={soilType} onChange={(e) => setSoilType(e.target.value)} />
+        <div className='mb-4'>
+          <label className='block text-gray-700'>Soil Type:</label>
+          <input type="text" value={soilType} 
+          className="w-full px-4 py-2 border rounded-md bg-lime-50 focus:outline-none focus:border-lime-500"
+          onChange={(e) => setSoilType(e.target.value)} />
         </div>
-        <div>
-          <label>Soil pH:</label>
-          <input type="number" value={soilPh} onChange={(e) => setSoilPh(e.target.value)} />
+        <div className='mb-4'>
+          <label className='block text-gray-700'>Soil pH:</label>
+          <input type="number" value={soilPh} 
+          className="w-full px-4 py-2 border rounded-md bg-lime-50 focus:outline-none focus:border-lime-500"
+          onChange={(e) => setSoilPh(e.target.value)} />
         </div>
-        <button type="submit">Save Plot</button>
+        <button className="mt-4 w-full bg-lime-600 hover:bg-lime-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
+        type="submit">Save Plot</button>
       </form>
-
-      <hr />
-
-      <h2>Your Plots</h2>
-      <ul>
-        {userPlots.map((plot) => (
-          <li key={plot.id}>
-            <strong>Name:</strong> {plot.name}, <strong>Sun Type:</strong> {plot.sun_type}, <strong>Soil Type:</strong> {plot.soil_type}, <strong>Soil pH:</strong> {plot.soil_ph}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
