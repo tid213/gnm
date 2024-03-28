@@ -83,28 +83,38 @@ const PlantForm = ({ plantId, session, closeButton }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <div onClick={()=> closeButton(true)}><a>Close</a></div>
-        <label>Plant Name:</label>
-        <input type="text" value={plantName} onChange={(e) => setPlantName(e.target.value)} required />
+    <div className='max-w-sm mx-auto p-6 bg-white rounded-lg shadow-md'>
+     <h2 className='text-2xl font-semibold mb-4'>Plant Form</h2>
+     <div onClick={()=> closeButton(true)}><a>Close</a></div>
+     <form onSubmit={handleSubmit}>
+      <div className='mb-4'>
+        <label className="block text-gray-700">Plant Name:</label>
+        <input type="text" value={plantName} 
+        className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
+        onChange={(e) => setPlantName(e.target.value)} required />
       </div>
-      <div>
-        <label>Sun Type:</label>
-        <select value={sunType} onChange={(e) => setSunType(e.target.value)}>
+      <div className='mb-4'>
+        <label className="block text-gray-700">Sun Type:</label>
+        <select value={sunType} 
+        className='w-full px-4 py-2 border rounded-md bg-lime-200'
+        onChange={(e) => setSunType(e.target.value)}>
           <option value="Full Sun">Full Sun</option>
           <option value="Part Sun">Part Sun</option>
           <option value="Part Shade">Part Shade</option>
           <option value="Full Shade">Full Shade</option>
         </select>
       </div>
-      <div>
-        <label>Watering Frequency:</label>
-        <input type="text" value={waterFreq} onChange={(e) => setWaterFreq(e.target.value)} required />
+      <div className='mb-4'>
+        <label className='block text-gray-700'>Watering Frequency:</label>
+        <input type="text" value={waterFreq} 
+        className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
+        onChange={(e) => setWaterFreq(e.target.value)} required />
       </div>
-      <div>
-        <label>Fertilizing Frequency:</label>
-        <select value={fertFreq} onChange={(e) => setFertFreq(e.target.value)}>
+      <div className='mb-4'>
+        <label className='block text-gray-700'>Fertilizing Frequency:</label>
+        <select value={fertFreq} 
+        className='w-full px-4 py-2 border rounded-md bg-lime-200'
+        onChange={(e) => setFertFreq(e.target.value)}>
           <option value="Two weeks">Two weeks</option>
           <option value="One Month">One Month</option>
           <option value="Two Months">Two Months</option>
@@ -113,18 +123,22 @@ const PlantForm = ({ plantId, session, closeButton }) => {
           <option value="Yearly">Yearly</option>
         </select>
       </div>
-      <div>
-        <label>Plant Plot:</label>
-        <select value={plantPlot} onChange={(e) => setPlantPlot(e.target.value)} required>
+      <div className='mb-4'>
+        <label className='block text-gray-700'>Plant Plot:</label>
+        <select value={plantPlot} 
+        className='w-full px-4 py-2 border rounded-md bg-lime-200'
+        onChange={(e) => setPlantPlot(e.target.value)} required>
           <option value="">Select Plot</option>
           {plots.map((plot) => (
             <option key={plot.id} value={plot.id}>{plot.name}</option>
           ))}
         </select>
       </div>
-      <div>
-        <label>Pruning Frequency:</label>
-        <select value={pruneFreq} onChange={(e) => setPruneFreq(e.target.value)}>
+      <div className='mb-4'>
+        <label className='block text-gray-700'>Pruning Frequency:</label>
+        <select value={pruneFreq} 
+        className='w-full px-4 py-2 border rounded-md bg-lime-200'
+        onChange={(e) => setPruneFreq(e.target.value)}>
           <option value="Monthly">Monthly</option>
           <option value="Two Months">Two Months</option>
           <option value="Three Months">Three Months</option>
@@ -132,9 +146,11 @@ const PlantForm = ({ plantId, session, closeButton }) => {
           <option value="Yearly">Yearly</option>
         </select>
       </div>
-      <div>
-        <label>Fertilizer Frequency:</label>
-        <select value={fertilizerFreq} onChange={(e) => setFertilizerFreq(e.target.value)}>
+      <div className='mb-4'>
+        <label className='block text-gray-700'>Fertilizer Frequency:</label>
+        <select value={fertilizerFreq} 
+        className='w-full px-4 py-2 border rounded-md bg-lime-200'
+        onChange={(e) => setFertilizerFreq(e.target.value)}>
           <option value="Two weeks">Two weeks</option>
           <option value="One Month">One Month</option>
           <option value="Two Months">Two Months</option>
@@ -143,8 +159,11 @@ const PlantForm = ({ plantId, session, closeButton }) => {
           <option value="Yearly">Yearly</option>
         </select>
       </div>
-      <button type="submit">Save Plant</button>
+      <button  
+      className="mt-4 w-full bg-lime-600 hover:bg-lime-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
+      type="submit">Save Plant</button>
     </form>
+    </div>
   );
 };
 
