@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from '../supabaseClient';
 import { Link } from 'react-router-dom';
+import googleIcon from '../images/google-icon.svg';
 
 const SignUpForm = () => {
   const [email, setEmail] = useState('');
@@ -66,15 +67,24 @@ const SignUpForm = () => {
           {loading ? 'Signing Up...' : 'Sign Up'}
         </button>
       </form>
+      <div className="mt-6 relative">
+        <div className="absolute inset-0 flex items-center">
+            <div className="w-full bg-gray-700" style={{ height: "1px" }}></div>
+        </div>
+        <div className="relative flex justify-center">
+            <span className="px-4 bg-white text-sm text-gray-700 uppercase">or</span>
+        </div>
+      </div>
       <button
-        className="mt-4 w-full bg-lime-600 hover:bg-lime-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
         onClick={handleGoogleSignIn}
-      >
-        Sign in with Google
+        className="mt-4 flex items-center justify-center w-full bg-white hover:border-lime-500 border-lime-500 text-gray-700 font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
+        >
+        <img src={googleIcon} alt="Google Icon" className="w-6 h-6 mr-2" />
+        Continue with Google
       </button>
       {message && <p className="mt-4 text-red-500">{message}</p>}
       <div className="mt-4 text-center">
-        <Link to="/signin" className="text-green-800 hover:text-green-600">Already signed up? Sign in</Link>
+        <Link to="/signin" className="text-green-800 hover:text-green-600">Already registered? Sign in</Link>
       </div>
       <div className="mt-2 text-center">
         <Link to="/" className="text-green-800 hover:text-green-600">Go back to Home</Link>
