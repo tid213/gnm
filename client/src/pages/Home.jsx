@@ -31,7 +31,7 @@ function Home () {
     };
 
       return (
-        <main className="min-h-screen flex flex-col items-center bg-green-600">
+        <main className="min-h-screen flex flex-col items-center bg-lime-200">
             <header className={`fixed top-0 w-full ${isTransparent ? 'bg-white' : 'bg-opacity-90 bg-white'}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16">
@@ -72,11 +72,13 @@ function Home () {
                 </div>
             )}
             </header>
-            <section className="flex flex-col justify-center items-center mt-16">
-                <img src={logo}></img>
-                <h1 className="text-4xl text-white font-inter font-light mb-8 text-center">Garden Notes</h1>
-                <p className="font-inter max-w-prose text-xl text-white">GreenNotes is your all-in-one solution for plant lovers. Whether you're a seasoned gardener or just starting out, GreenNotes helps you keep track of all your plants effortlessly.</p>
+            <div className="flex flex-col justify-center items-center h-screen">
+            <section className="flex flex-col justify-center items-center">
+                <img src={logo} alt="Logo" />
+                <h1 className="text-5xl text-black font-inter font-normal mb-8 text-center">Garden Notes</h1>
+                <p className="font-inter font-light max-w-prose text-xl text-black">Your all-in-one solution for plant lovers. Whether you're a seasoned gardener or just starting out, we're here to help you keep track of all your plants effortlessly.</p>
             </section>
+            </div>
             <section className="flex space-x-4">
                 <Link to="/signin" className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded">
                 Sign In
