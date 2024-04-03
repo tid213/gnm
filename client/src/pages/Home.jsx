@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import NavBar from "../components/NavBar";
-import logo from '../images/landing-logo.png';
 import plantHouse from '../images/plant-house.svg';
 import landingImage from '../images/landing-image.svg';
+import headerImage from '../images/note-with-pencil.svg'
 
 function Home () {
 
@@ -38,8 +37,7 @@ function Home () {
                 <div className="flex justify-between h-16">
                 <div className="flex-shrink-0 flex items-center">
                     {/* Logo */}
-                    <img className="block lg:hidden h-8 w-auto" src={plantHouse} alt="Logo" />
-                    <img className="hidden lg:block h-8 w-auto" src={plantHouse} alt="Logo" />
+                    <h1 className="text-2xl font-bold dancing-script text-lime-600">Garden Notes</h1>
                 </div>
                 <div className="hidden lg:flex lg:items-center lg:justify-end lg:flex-1">
                     {/* Navigation Links */}
@@ -76,27 +74,28 @@ function Home () {
             <section className="flex flex-col mt-16">
                 <div className="lg:flex lg:items-center items-center">
                     {/* Image */}
-                    <img className="mb-4 lg:mb-0 lg:mr-8  max-w-sm mx-auto lg:max-w-lg" src={landingImage} alt="Landing Image" />
-
+                    <div className="lg:w-6/12">
+                        <img className="mb-4 lg:mb-0 lg:mr-8  max-w-sm mx-auto lg:max-w-lg" src={landingImage} alt="Landing Image" />
+                    </div>
                     {/* Text content */}
-                    <div>
+                    <div className="lg:w-6/12">
                     {/* Heading */}
-                    <h1 className="text-5xl text-black dancing-script font-normal mb-4 lg:mb-8 text-center">GardenNotes.me</h1>
+                    <h1 className="text-5xl text-black dancing-script font-normal mb-4 lg:mb-8 text-center">Welcome to Garden Notes!</h1>
                     
                     {/* Paragraph */}
-                    <p className="font-inter font-normal max-w-prose px-8 text-xl text-black text-center lg:text-left">
-                        Your all-in-one solution for plant lovers. Whether you're a seasoned gardener or just starting out, Garden Notes is here to help you keep track of all your plants effortlessly.
+                    <p className="inter font-normal max-w-prose px-8 text-lg text-black text-center ">
+                    GardenNotes.me is your all-in-one solution for plant lovers. Whether you're a seasoned gardener or just starting out, GardenNotes.me helps you keep track of all your plants effortlessly.
                     </p>
+                    {/* Buttons */}
+                    <div className="flex flex-col w-full lg:justify-center items-center mt-6 lg:flex-row">
+                        <Link to="/signin" className="inline-block bg-customMidGreen w-6/12 lg:w-3/12 hover:bg-customDarkGreen text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Sign In</Link>
+                        <Link to="/signup" className="inline-block mt-2 lg:mt-0 lg:ml-4 bg-customOrange w-6/12 lg:w-3/12 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Sign Up</Link>
+                    </div>
                     </div>
                 </div>
             </section>
             <section className="flex space-x-4">
-                <Link to="/signin" className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded">
-                Sign In
-                </Link>
-                <Link to="/signup" className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded">
-                Sign Up
-                </Link>
+                
             </section>
         </main>
       );
