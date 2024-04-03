@@ -45,7 +45,6 @@ function Home () {
                     <Link to="/home" className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Home</Link>
                     <Link to="/signup" className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Sign Up</Link>
                     <Link to="/signin" className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Sign In</Link>
-                    <Link to="/forgotpassword" className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Forgot Password</Link>
                     </nav>
                 </div>
                 {/* Hamburger Menu for Mobile */}
@@ -66,7 +65,6 @@ function Home () {
                     <Link to="/home" className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Home</Link>
                     <Link to="/signup" className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Sign Up</Link>
                     <Link to="/signin" className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Sign In</Link>
-                    <Link to="/forgotpassword" className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Forgot Password</Link>
                 </div>
                 </div>
             )}
@@ -83,13 +81,13 @@ function Home () {
                     <h1 className="text-5xl text-black dancing-script font-normal mb-4 lg:mb-8 text-center">Welcome to Garden Notes!</h1>
                     
                     {/* Paragraph */}
-                    <p className="inter font-normal max-w-prose px-8 text-lg text-black text-center ">
+                    <p className="inter font-light max-w-prose px-8 text-lg text-black text-center ">
                     GardenNotes.me is your all-in-one solution for plant lovers. Whether you're a seasoned gardener or just starting out, GardenNotes.me helps you keep track of all your plants effortlessly.
                     </p>
                     {/* Buttons */}
                     <div className="flex flex-col w-full lg:justify-center items-center mt-6 lg:flex-row">
-                        <Link to="/signin" className="inline-block bg-customMidGreen w-6/12 lg:w-3/12 hover:bg-customDarkGreen text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Sign In</Link>
-                        <Link to="/signup" className="inline-block mt-2 lg:mt-0 lg:ml-4 bg-customOrange w-6/12 lg:w-3/12 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Sign Up</Link>
+                        <Link to="/signin" className="inline-block inter bg-customMidGreen w-8/12 lg:w-3/12 hover:bg-customDarkGreen text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Sign In</Link>
+                        <Link to="/signup" className="inline-block inter mt-2 lg:mt-0 lg:ml-4 bg-customOrange w-8/12 lg:w-3/12 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Sign Up</Link>
                     </div>
                     </div>
                 </div>
