@@ -37,7 +37,7 @@ function Home () {
                 <div className="flex justify-between h-16">
                 <div className="flex-shrink-0 flex items-center">
                     {/* Logo */}
-                    <h1 className="text-2xl font-normal dancing-script text-lime-600">Garden Notes</h1>
+                    <h1 className="text-base font-normal inter text-customBrown">gardennotes<b className="text-customOrange">.</b><b className="text-customMidGreen">me</b></h1>
                 </div>
                 <div className="hidden lg:flex lg:items-center lg:justify-end lg:flex-1">
                     {/* Navigation Links */}
@@ -69,7 +69,7 @@ function Home () {
                 </div>
             )}
             </header>
-            <section className="flex flex-col mt-16">
+            <section className=" min-h-screen flex flex-col mt-16">
                 <div className="lg:flex lg:items-center items-center">
                     {/* Image */}
                     <div className="lg:w-6/12">
@@ -78,7 +78,8 @@ function Home () {
                     {/* Text content */}
                     <div className="lg:w-6/12">
                     {/* Heading */}
-                    <h1 className="text-5xl text-black dancing-script font-normal mb-4 lg:mb-8 text-center">Welcome to GardenNotes.me!</h1>
+                    <p className="inter font-normal mb-4 max-w-prose px-8 text-2xl text-customDarkGreen text-center ">Welcome to</p>
+                    <h1 className="text-5xl text-customDarkGreen inter font-bold mb-4 lg:mb-8 text-center">gardennotes<b className="text-customOrange">.</b><b className="text-customMidGreen">me</b></h1>
                     
                     {/* Paragraph */}
                     <p className="inter font-light max-w-prose px-8 text-lg text-black text-center ">
