@@ -35,12 +35,12 @@ function SignUp(){
                 <div className="flex justify-between h-16">
                 <div className="flex-shrink-0 flex items-center">
                     {/* Logo */}
-                    <h1 className="text-2xl font-bold dancing-script text-lime-600">Garden Notes</h1>
+                    <h1 className="text-base font-normal inter text-customBrown">gardennotes<b className="text-customOrange">.</b><b className="text-customMidGreen">me</b></h1>
                 </div>
                 <div className="hidden lg:flex lg:items-center lg:justify-end lg:flex-1">
                     {/* Navigation Links */}
                     <nav className="flex space-x-4">
-                    <Link to="/home" className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Home</Link>
+                    <Link to="/" className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Home</Link>
                     <Link to="/signup" className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Sign Up</Link>
                     <Link to="/signin" className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Sign In</Link>
                     </nav>
@@ -60,7 +60,7 @@ function SignUp(){
             {isOpen && (
                 <div className="lg:hidden">
                 <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-md">
-                    <Link to="/home" className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Home</Link>
+                    <Link to="/" className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Home</Link>
                     <Link to="/signup" className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Sign Up</Link>
                     <Link to="/signin" className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Sign In</Link>
                 </div>
