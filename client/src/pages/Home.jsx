@@ -6,6 +6,7 @@ import noteAndPencil from '../images/note-with-pencil.svg'
 import plantIcon from '../images/plant-icon.svg';
 import imgIcon from '../images/img-icon.svg';
 import weatherIcon from '../images/weather-icon.svg';
+import whiteLeaf from '../images/white-leaf.svg';
 
 function Home () {
 
@@ -90,12 +91,12 @@ function Home () {
                     </div>
                 </div>
             </section>
-            <section className="container mx-auto py-8">
+            <section className="container mx-auto py-8 ">
                 {/* Top row */}
                 <div className="flex justify-center">
                     <div className="text-center"><h1 className="text-5xl text-customDarkGreen inter font-bold mb-4 lg:mb-8 text-center">here to help<b className="text-customOrange">.</b></h1></div>
                 </div>
-                <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 lg:mx-24 mx-4">
+                <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 lg:mx-24 mx-4 mt-4">
                     <div className="bg-white p-4 flex items-center rounded-lg shadow-md">
                     <img src={noteAndPencil} alt="Note and Pencil" className="mr-4 max-h-8" />
                     <p className="inter font-light max-w-prose text-lg text-black text-left">
@@ -120,10 +121,35 @@ function Home () {
                         <b className="font-bold">Weather tracking:</b> Provides real-time local weather updates, including temperature and precipitation forecasts, to help you make informed decisions about watering, planting, and caring for your plants, ensuring they thrive in every season.
                     </p>
                     </div>
+                </div>  
+            </section>
+            <section className="container mx-auto py-8 mt-12">
+                <div className="flex justify-center"><div className="text-center"><h1 className="text-5xl text-customDarkGreen inter font-bold mb-4 lg:mb-8 text-center">benefits<b className="text-customOrange">.</b></h1></div></div>
+                <div className="px-4 lg:grid lg:grid-cols-2 gap-4 lg:mx-12">
+                    <div className="bg-customDarkGreen mt-4 p-4 flex flex-col lg:flex-row items-center flex-col-reverse rounded-lg shadow-md">
+                    <img src={whiteLeaf} alt="Note and Pencil" className="lg:mr-4 lg:mb-0 lg:mt-0 mt-4 mb-4 max-h-12 px-4" />
+                    <p className="text-lg text-white mt-4 lg:mt-0 inter lg:text-left font-light lg:py-4 ">Keeping notes for plant care can be highly beneficial as 
+                        it allows gardeners to track their plant's progress, understand
+                         their unique needs, and make informed decisions for optimal 
+                         growth. Research has shown that keeping detailed records of 
+                         plant care activities can lead to healthier and more productive 
+                         plants. 
+                    </p>
+                    </div>
+                    <div className="bg-customDarkGreen mt-4 p-4 flex lg:flex-row flex-col items-center flex-col-reverse rounded-lg shadow-md">
+                    <img src={whiteLeaf} alt="Note and Pencil" className="lg:mr-4 lg:mb-0 lg:mt-0 mt-4 mb-4 max-h-12 px-4" />
+                        <p className="text-lg inter lg:text-left lg:mt-0 mt-4 text-white px-4 font-normal">Additionally, notes can help identify patterns, track growth milestones, and troubleshoot problems more effectively. By documenting watering schedules, fertilizer applications, pruning routines, and observations, gardeners can create personalized care plans tailored to each plant's specific requirements, ultimately fostering a thriving and beautiful garden.</p>
+                    </div>
+                    <div className="p-4 lg:mx-24 flex items-center col-span-2">
+                    <p className="text-lg inter px-4 font-light">For example, a study published in the Journal of 
+                         Environmental Horticulture found that gardeners who maintained 
+                         records of their plant care activities experienced a 30% 
+                         increase in plant yield compared to those who did not keep 
+                         such records. 
+                    </p>
+                    </div>
                 </div>
-
-                {/* Bottom row */}
-                </section>
+            </section>
         </main>
       );
 
