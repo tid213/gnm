@@ -7,6 +7,7 @@ import NoteForm from "../components/NoteForm";
 import loadingImg from '../images/bouncing-circles.svg';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import PlantList from "../components/PlantList";
 
 function Dashboard ({session}) {
 
@@ -28,6 +29,7 @@ function Dashboard ({session}) {
 
     useEffect(()=>{
         fetchUserInfo();
+        fetchPlantData();
         const handleScroll = () => {
             const scrollPosition = window.scrollY;
             if (scrollPosition > 0) {
@@ -217,7 +219,8 @@ function Dashboard ({session}) {
                     </div>
                 )}
                 </header>
-                {viewContainer()}   
+                {viewContainer()} 
+                {plantData ? <PlantList plantData={plantData} /> : ""}  
             </div>
         )
     }
