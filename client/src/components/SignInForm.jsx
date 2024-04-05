@@ -36,8 +36,8 @@ const SignInForm = () => {
   }
 
   return (
-    <div className="max-w-sm mx-auto p-6 bg-white rounded-lg shadow-md">
-  <h2 className="text-2xl font-semibold mb-4">Sign In</h2>
+    <div className="max-w-sm mx-auto inter p-6 bg-white rounded-lg shadow-md">
+  <h2 className="text-3xl text-customMidGreen font-semibold mb-4">sign in<b className='text-customOrange'>.</b></h2>
   <form onSubmit={handleSignIn}>
     <div className="mb-4">
       <label className="block text-gray-700">Email:</label>
@@ -62,7 +62,7 @@ const SignInForm = () => {
     <button
       type="submit"
       disabled={loading}
-      className="w-full bg-lime-600 hover:bg-lime-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
+      className="w-full bg-customOrange hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
     >
       {loading ? 'Signing In...' : 'Sign In'}
     </button>
