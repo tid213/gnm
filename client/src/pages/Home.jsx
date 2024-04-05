@@ -6,7 +6,7 @@ import noteAndPencil from '../images/note-with-pencil.svg'
 import plantIcon from '../images/plant-icon.svg';
 import imgIcon from '../images/img-icon.svg';
 import weatherIcon from '../images/weather-icon.svg';
-import whiteLeaf from '../images/white-leaf.svg';
+import wateringPlantImg from '../images/person-watering-plant.svg';
 
 function Home () {
 
@@ -123,30 +123,39 @@ function Home () {
                     </div>
                 </div>  
             </section>
-            <section className="container mx-auto py-8 mt-12">
+            <section className="container  mx-auto py-8 mt-12">
                 <div className="flex justify-center"><div className="text-center"><h1 className="text-5xl text-customDarkGreen inter font-bold mb-4 lg:mb-8 text-center">benefits<b className="text-customOrange">.</b></h1></div></div>
                 <div className="px-4 lg:grid lg:grid-cols-2 gap-4 lg:mx-12">
-                    <div className="bg-customDarkGreen mt-4 p-4 flex flex-col lg:flex-row items-center flex-col-reverse rounded-lg shadow-md">
-                    <img src={whiteLeaf} alt="Note and Pencil" className="lg:mr-4 lg:mb-0 lg:mt-0 mt-4 mb-4 max-h-12 px-4" />
-                    <p className="text-lg text-white mt-4 lg:mt-0 inter lg:text-left font-light lg:py-4 ">Keeping notes for plant care can be highly beneficial as 
-                        it allows gardeners to track their plant's progress, understand
-                         their unique needs, and make informed decisions for optimal 
-                         growth. Research has shown that keeping detailed records of 
-                         plant care activities can lead to healthier and more productive 
-                         plants. 
+                    <div className="bg-customMidGreen mt-4 p-4 flex lg:flex-row flex-col items-center flex-col-reverse rounded-lg shadow-md">
+                        <p className="text-lg inter lg:mt-0 mt-4 text-white px-4 font-normal">
+                        Keeping notes for plant care can be highly beneficial as it allows gardeners to track their plant's progress, understand their unique needs, and make informed decisions for optimal growth. Research has shown that keeping detailed records of plant care activities can lead to healthier and more productive plants.
+                        </p>
+                    </div>
+                    <div className=" row-span-2">
+                        <img className="mb-4 lg:mt-4 lg:mb-0  max-w-sm mx-auto lg:max-w-md" src={wateringPlantImg} alt="Person watering a plant" />
+                    </div>
+                    <div className="bg-customMidGreen mt-4 p-4 flex flex-col items-center rounded-lg shadow-md">
+                    <p className="text-lg inter px-4 text-white font-normal">Additionally, notes can help identify patterns, track growth milestones, and troubleshoot problems more effectively. By documenting watering schedules, fertilizer applications, pruning routines, and observations, gardeners can create personalized care plans tailored to each plant's specific requirements, ultimately fostering a thriving and beautiful garden.
                     </p>
                     </div>
-                    <div className="bg-customDarkGreen mt-4 p-4 flex lg:flex-row flex-col items-center flex-col-reverse rounded-lg shadow-md">
-                    <img src={whiteLeaf} alt="Note and Pencil" className="lg:mr-4 lg:mb-0 lg:mt-0 mt-4 mb-4 max-h-12 px-4" />
-                        <p className="text-lg inter lg:text-left lg:mt-0 mt-4 text-white px-4 font-normal">Additionally, notes can help identify patterns, track growth milestones, and troubleshoot problems more effectively. By documenting watering schedules, fertilizer applications, pruning routines, and observations, gardeners can create personalized care plans tailored to each plant's specific requirements, ultimately fostering a thriving and beautiful garden.</p>
-                    </div>
-                    <div className="p-4 lg:mx-24 flex items-center col-span-2">
-                    <p className="text-lg inter px-4 font-light">For example, a study published in the Journal of 
-                         Environmental Horticulture found that gardeners who maintained 
-                         records of their plant care activities experienced a 30% 
-                         increase in plant yield compared to those who did not keep 
-                         such records. 
+                </div>
+            </section>
+            <section className="container w-screen flex flex-col mx-auto py-8 mt-12">
+                <div className="flex justify-center"><div className="text-center"><h1 className="text-5xl text-customDarkGreen inter font-bold mb-4 lg:mb-8 text-center">let's get started<b className="text-customOrange">.</b></h1></div></div>
+                <div className="flex flex-col items-center">
+                <div className="lg:mt-4 p-4 flex lg:w-8/12 lg:flex-row flex-col items-center">
+                    <p className="text-lg inter lg:mt-0 text-black px-4 font-normal">
+                    Join our growing community of plant enthusiasts today! Sign up now to start keeping track of your plant care routines, milestones, and observations effortlessly. With GardenNotes.me, you'll never forget a watering schedule or pruning tip again. Plus, gain access to local weather forecasts to help your plants thrive in any season.
+
+                    Get started on your journey to greener thumbs today!
+                    <br/>
+                    <br/>
+                    Sign up now and let your gardening adventures begin!
                     </p>
+                </div>
+                <div className="flex flex-col w-full lg:justify-center items-center mt-6 lg:flex-row">
+                        <Link to="/signin" className="inline-block inter bg-customMidGreen w-8/12 lg:w-3/12 hover:bg-customDarkGreen text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Sign In</Link>
+                        <Link to="/signup" className="inline-block inter mt-2 lg:mt-0 lg:ml-4 bg-customOrange w-8/12 lg:w-3/12 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Sign Up</Link>
                     </div>
                 </div>
             </section>
