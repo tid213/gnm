@@ -80,13 +80,13 @@ const NoteForm = ({session, closeButton}) => {
 
   return (
     <div className='w-full max-w-sm md:max-w-md mx-auto p-6 bg-white rounded-lg shadow-md'>
+        <div onClick={()=> closeButton(true)}><a>Close</a></div>
         <h2 className='text-2xl font-semibold mb-4'>Write a Note</h2>
         <form onSubmit={handleSubmit}>
-        <div onClick={()=> closeButton(true)}><a>Close</a></div>
       <div className='mb-4'>
         <label className='block text-gray-700'>Note Type:</label>
         <select value={noteType} 
-        className="w-full px-4 py-2 border rounded-md bg-lime-50 focus:outline-none focus:border-lime-500"
+        className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
         onChange={(e) => handleNoteTypeChange(e.target.value)} required>
           <option value="General">Garden Note</option>
           <option value="Plant">Plant Note</option>
@@ -97,7 +97,7 @@ const NoteForm = ({session, closeButton}) => {
         <div className='mb-4'>
           <label className='block text-gray-700'>Note For:</label>
           <select value={noteFor} 
-          className="w-full px-4 py-2 border rounded-md bg-lime-50 focus:outline-none focus:border-lime-500"
+          className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
           onChange={(e) => handleNoteForChange(e.target.value)} required>
             <option value="">Select Plant</option>
             {userPlants.map((plant, index) => (
@@ -110,7 +110,7 @@ const NoteForm = ({session, closeButton}) => {
         <div className='mb-4'>
           <label className='block text-gray-700'>Note For:</label>
           <select value={noteFor} 
-          className="w-full px-4 py-2 border rounded-md bg-lime-50 focus:outline-none focus:border-lime-500"
+          className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
           onChange={(e) => handleNoteForChange(e.target.value)} required>
             <option value="">Select Plot</option>
             {userPlots.map((plot, index) => (
@@ -122,10 +122,10 @@ const NoteForm = ({session, closeButton}) => {
       <div>
         <label className='block text-gray-700'>Note:</label>
         <textarea value={note} 
-        className="w-full px-4 py-2 border rounded-md bg-lime-50 focus:outline-none focus:border-lime-500"
+        className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
         onChange={(e) => setNote(e.target.value)} required />
       </div>
-      <button className="mt-4 w-full bg-lime-600 hover:bg-lime-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
+      <button className="mt-4 w-full bg-customOrange hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
       type="submit">Save Note</button>
     </form>
     </div>

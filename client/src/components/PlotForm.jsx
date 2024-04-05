@@ -80,13 +80,13 @@ const PlotForm = ({ plotId, session, closeButton }) => {
         <div className='mb-4'>
           <label className='block text-gray-700'>Name:</label>
           <input type="text" value={name} 
-          className="w-full px-4 py-2 border rounded-md bg-lime-50 focus:outline-none focus:border-lime-500"
+          className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
           onChange={(e) => setName(e.target.value)} required />
         </div>
         <div className='mb-4'>
           <label className='block text-gray-700'>Sun Type:</label>
           <select value={sunType} 
-          className="w-full px-4 py-2 border rounded-md bg-lime-50 focus:outline-none focus:border-lime-500"
+          className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
           onChange={(e) => setSunType(e.target.value)}>
             <option value="Full Sun">Full Sun</option>
             <option value="Part Sun">Part Sun</option>
@@ -97,16 +97,16 @@ const PlotForm = ({ plotId, session, closeButton }) => {
         <div className='mb-4'>
           <label className='block text-gray-700'>Soil Type:</label>
           <input type="text" value={soilType} 
-          className="w-full px-4 py-2 border rounded-md bg-lime-50 focus:outline-none focus:border-lime-500"
+          className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
           onChange={(e) => setSoilType(e.target.value)} />
         </div>
         <div className='mb-4'>
           <label className='block text-gray-700'>Soil pH:</label>
           <input type="number" value={soilPh} 
-          className="w-full px-4 py-2 border rounded-md bg-lime-50 focus:outline-none focus:border-lime-500"
+          className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
           onChange={(e) => setSoilPh(e.target.value)} />
         </div>
-        <button className="mt-4 w-full bg-lime-600 hover:bg-lime-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
+        <button className="mt-4 w-full bg-customOrange hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
         type="submit">Save Plot</button>
       </form>
     </div>
