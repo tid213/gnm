@@ -153,7 +153,7 @@ const PlantForm = ({ plantId, session, closeButton }) => {
         onChange={(e) => setPlantPlot(e.target.value)} required>
           <option value="">Select Plot</option>
           {plots.map((plot) => (
-            <option key={plot.id} value={plot.id}>{plot.name}</option>
+            <option key={plot.id} value={plot.name}>{plot.name}</option>
           ))}
         </select>
       </div>

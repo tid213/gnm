@@ -71,7 +71,7 @@ const PlotForm = ({ plotId, session, closeButton }) => {
   };
 
   return (
-    <div className='w-full max-w-sm md:max-w-md mx-auto p-6 bg-white rounded-lg shadow-md'>
+    <div className='w-full mt-12 max-w-sm md:max-w-md mx-auto p-6 bg-white rounded-lg shadow-md'>
       <div onClick={()=> closeButton(true)}><a>Close</a></div>
       <h2 className='text-2xl font-semibold mb-4'>
         {plotId ? "Edit Plot" : "Add Plot"}

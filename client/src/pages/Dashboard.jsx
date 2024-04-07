@@ -219,8 +219,9 @@ function Dashboard ({session}) {
                     </div>
                 )}
                 </header>
-                {viewContainer()} 
-                {plantData ? <PlantList plantData={plantData} /> : ""}  
+                <div className="h-12 mt-6"></div>
+                <div className="absolute top-12 max-w-full">{viewContainer()} </div>
+                <div className="mt-24">{plantData ? <PlantList plantData={plantData} /> : ""} </div> 
             </div>
         )
     }
