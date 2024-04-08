@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 
-const AccountForm = ({session}) => {
+const AccountForm = ({session, closeButton}) => {
   const [username, setUsername] = useState('');
   const [website, setWebsite] = useState('');
   const [avatarUrl, setAvatarUrl] = useState('');
@@ -13,25 +13,23 @@ const AccountForm = ({session}) => {
   useEffect(() => {
     fetchProfile();
   }, []);
-
   const fetchProfile = async () => {
     try {
-      const { user } = session
       setLoading(true);
-      if (user) {
+      if (session) {
         const { data, error } = await supabase
           .from('profiles')
-          .select('*')
-          .eq('id', user.id)
+          .select()
+          .eq('id', session.user.id)
         if (error) {
           throw error;
         }
         if (data) {
-          setUsername(data.username || '');
-          setWebsite(data.website || '');
-          setAvatarUrl(data.avatar_url || '');
-          setZone(data.zone || '');
-          setZipCode(data.zip_code || '');
+          setUsername(data[0].username || '');
+          setWebsite(data[0].website || '');
+          setAvatarUrl(data[0].avatar_url || '');
+          setZone(data[0].zone || '');
+          setZipCode(data[0].zip_code || '');
         }
       }
     } catch (error) {
@@ -72,51 +70,40 @@ const AccountForm = ({session}) => {
   };
 
   return (
-    <div>
-      <h2>Account Settings</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username:</label>
+    <div className="inter relative mt-12 max-w-sm lg:w-96 mx-auto p-6 bg-white rounded-lg shadow-md">
+      <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>
+      <h2 className="text-3xl font-semibold mb-4 text-customMidGreen">Account Info</h2>
+      <form onSubmit={handleSubmit} >
+        <div className='mb-4'>
+          <label className='block text-gray-700'>Username:</label>
           <input
             type="text"
+            className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
         </div>
-        <div>
-          <label>Website:</label>
-          <input
-            type="url"
-            value={website}
-            onChange={(e) => setWebsite(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Avatar URL:</label>
-          <input
-            type="url"
-            value={avatarUrl}
-            onChange={(e) => setAvatarUrl(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Zone:</label>
+        <div className='mb-4'>
+          <label className='block text-gray-700'>Grow Zone:</label>
           <input
             type="text"
+            className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
             value={zone}
             onChange={(e) => setZone(e.target.value)}
           />
         </div>
-        <div>
-          <label>Zip Code:</label>
+        <div className='mb-4'>
+          <label className='block text-gray-700'>Zip Code:</label>
           <input
             type="text"
+            className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
             value={zipCode}
             onChange={(e) => setZipCode(e.target.value)}
           />
         </div>
-        <button type="submit" disabled={loading}>Save</button>
+        <button className="mt-4 w-full bg-customOrange hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
+        type="submit" disabled={loading}>Save</button>
       </form>
       {message && <p>{message}</p>}
     </div>

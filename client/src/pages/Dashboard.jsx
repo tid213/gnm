@@ -8,6 +8,7 @@ import loadingImg from '../images/bouncing-circles.svg';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import PlantList from "../components/PlantList";
+import weatherIcon from '../images/weather-image.svg';
 
 function Dashboard ({session}) {
 
@@ -177,7 +178,7 @@ function Dashboard ({session}) {
         )
     } else{
         return(
-            <div className="min-h-screen flex flex-col justify-center items-center bg-customLightBrown">
+            <div className="min-h-screen flex flex-col items-center bg-customLightBrown">
                 <header className={`fixed top-0 w-full ${isTransparent ? 'bg-white' : 'bg-opacity-90 bg-white'}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
@@ -191,7 +192,7 @@ function Dashboard ({session}) {
                         <span onClick={()=> setFormView("add note")} className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Add Note</span>
                         <span onClick={()=> setFormView("add plant")} className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Add Plant</span>
                         <span onClick={()=> setFormView("add plot")} className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Add Plot</span>
-                        <span className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Account</span>
+                        <span onClick={()=> setFormView("edit account")} className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Account</span>
                         <span onClick={() => handleSignOut()} className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Sign Out</span>                        
                         </nav>
                     </div>
@@ -213,15 +214,17 @@ function Dashboard ({session}) {
                         <span onClick={()=> {setFormView("add plant"); setIsOpen(false);}} className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Add Plant</span>
                         <span onClick={()=> {setFormView("add plot");setIsOpen(false);}} className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Add Plot</span>
                         <span onClick={()=> {setFormView("add note");setIsOpen(false);}} className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Write Note</span>
-                        <span  className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Account</span>
+                        <span onClick={()=> {setFormView("edit account");setIsOpen(false);}} className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Account</span>
                         <span onClick={() => handleSignOut()} className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Sign Out</span>
                     </div>
                     </div>
                 )}
                 </header>
-                <div className="h-12 mt-6"></div>
                 <div className="absolute top-12 max-w-full">{viewContainer()} </div>
-                <div className="mt-24">{plantData ? <PlantList plantData={plantData} /> : ""} </div> 
+                <div>
+                    
+                </div>
+                <div className="mt-36">{plantData ? <PlantList plantData={plantData} /> : ""} </div> 
             </div>
         )
     }

@@ -83,20 +83,20 @@ const PlantForm = ({ plantId, session, closeButton }) => {
   };
 
   return (
-    <div className='w-full inter mt-12 max-w-sm md:max-w-md mx-auto p-6 bg-white rounded-lg shadow-md'>
-     <div onClick={()=> closeButton(true)}><a>Close</a></div>
+    <div className='relative w-full inter mt-12 max-w-sm md:max-w-md mx-auto p-6 bg-white rounded-lg shadow-md'>
+     <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>
      <h2 className='text-2xl font-semibold mb-4'>Plant Form</h2>
      <form onSubmit={handleSubmit} className='lg:grid lg:grid-cols-2 lg:gap-4'>
       <div className='mb-4 lg:col-span-2'>
         <label className="block text-gray-700">Plant Name:</label>
         <input type="text" value={plantName} 
-        className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
+        className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
         onChange={(e) => setPlantName(e.target.value)} required />
       </div>
       <div className='mb-4 lg:col-span-2'>
         <label className="block text-gray-700">Sun Type:</label>
         <select value={sunType} 
-        className='w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500'
+        className='w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500'
         onChange={(e) => setSunType(e.target.value)}>
           <option value="Full Sun">Full Sun</option>
           <option value="Part Sun">Part Sun</option>
@@ -109,7 +109,7 @@ const PlantForm = ({ plantId, session, closeButton }) => {
         <select
             value={waterFreq}
             onChange={(e) => setWaterFreq(e.target.value)}
-            className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
+            className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
             required
         >
             <option value="">Select Frequency</option>
@@ -124,7 +124,7 @@ const PlantForm = ({ plantId, session, closeButton }) => {
       <div className='mb-4'>
         <label className='block text-gray-700'>Fertilizing Frequency:</label>
         <select value={fertFreq} 
-        className='w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500'
+        className='w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500'
         onChange={(e) => setFertFreq(e.target.value)}>
           <option value="Two weeks">Two weeks</option>
           <option value="One Month">One Month</option>
@@ -137,7 +137,7 @@ const PlantForm = ({ plantId, session, closeButton }) => {
       <div className='mb-4'>
         <label className='block text-gray-700'>Pruning Frequency:</label>
         <select value={pruneFreq} 
-        className='w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500'
+        className='w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500'
         onChange={(e) => setPruneFreq(e.target.value)}>
           <option value="Monthly">Monthly</option>
           <option value="Two Months">Two Months</option>
@@ -149,7 +149,7 @@ const PlantForm = ({ plantId, session, closeButton }) => {
       <div className='mb-4'>
         <label className='block text-gray-700'>Plant Plot:</label>
         <select value={plantPlot} 
-        className='w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500'
+        className='w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500'
         onChange={(e) => setPlantPlot(e.target.value)} required>
           <option value="">Select Plot</option>
           {plots.map((plot) => (

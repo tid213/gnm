@@ -79,14 +79,14 @@ const NoteForm = ({session, closeButton}) => {
   };
 
   return (
-    <div className='w-full mt-12 max-w-md lg:max-w-md mx-auto p-6 bg-white rounded-lg shadow-md'>
-        <div onClick={()=> closeButton(true)}><a>Close</a></div>
+    <div className='relative inter w-full mt-12 max-w-md lg:w-96 mx-auto p-6 bg-white rounded-lg shadow-md'>
+        <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>
         <h2 className='text-2xl font-semibold mb-4'>Write a Note</h2>
         <form onSubmit={handleSubmit}>
       <div className='mb-4'>
         <label className='block text-gray-700'>Note Type:</label>
         <select value={noteType} 
-        className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
+        className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
         onChange={(e) => handleNoteTypeChange(e.target.value)} required>
           <option value="General">Garden Note</option>
           <option value="Plant">Plant Note</option>
@@ -97,7 +97,7 @@ const NoteForm = ({session, closeButton}) => {
         <div className='mb-4'>
           <label className='block text-gray-700'>Note For:</label>
           <select value={noteFor} 
-          className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
+          className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
           onChange={(e) => handleNoteForChange(e.target.value)} required>
             <option value="">Select Plant</option>
             {userPlants.map((plant, index) => (
@@ -110,7 +110,7 @@ const NoteForm = ({session, closeButton}) => {
         <div className='mb-4'>
           <label className='block text-gray-700'>Note For:</label>
           <select value={noteFor} 
-          className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
+          className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
           onChange={(e) => handleNoteForChange(e.target.value)} required>
             <option value="">Select Plot</option>
             {userPlots.map((plot, index) => (
@@ -122,7 +122,7 @@ const NoteForm = ({session, closeButton}) => {
       <div>
         <label className='block text-gray-700'>Note:</label>
         <textarea value={note} 
-        className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
+        className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
         onChange={(e) => setNote(e.target.value)} required />
       </div>
       <button className="mt-4 w-full bg-customOrange hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
