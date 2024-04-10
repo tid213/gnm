@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import plantHouse from '../images/plant-house.svg';
 import landingImage from '../images/landing-image.svg';
 import noteAndPencil from '../images/note-with-pencil.svg'
-import plantIcon from '../images/plant-icon.svg';
+import plantIcon from '../images/plant-black.svg';
 import imgIcon from '../images/img-icon.svg';
 import weatherIcon from '../images/weather-icon.svg';
 import wateringPlantImg from '../images/person-watering-plant.svg';

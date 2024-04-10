@@ -8,7 +8,10 @@ import loadingImg from '../images/bouncing-circles.svg';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import PlantList from "../components/PlantList";
+import plantIconBlack from '../images/plant-black.svg';
+import notebookIconBlack from '../images/notebook-black.svg';
 import weatherIcon from '../images/weather-image.svg';
+import PlantView from "../components/PlantView";
 
 function Dashboard ({session}) {
 
@@ -27,6 +30,8 @@ function Dashboard ({session}) {
     const [formView, setFormView] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [isTransparent, setIsTransparent] = useState(true);
+    const [notesOrPlantsToggle, setNotesOrPlantsToggle] = useState("plants")
+    const [viewPlantID, setViewPlantID] = useState();
 
     useEffect(()=>{
         fetchUserInfo();
@@ -50,6 +55,14 @@ function Dashboard ({session}) {
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
+
+    const handleSignOut = async () => {
+        // Sign out the user
+        await supabase.auth.signOut();
+    
+        // Redirect to the home page
+        navigate('/');
+      };
 
     const fetchUserInfo = async () => {
         try {
@@ -148,7 +161,45 @@ function Dashboard ({session}) {
         if(data){
             setFormView("edit " + data)
         }
-    }
+    };
+
+    const setPlantID = (data) => {
+        if(data){
+            setFormView("")
+            setViewPlantID(data)
+            setFormView("view plant")
+        }
+    };
+
+    const togglePlantsNotes = () => {
+        if(notesOrPlantsToggle === "notes"){
+            return(
+                <div className="inter flex justify-between bg-white w-36 h-12 mt-24 rounded-lg shadow-md">
+                    <div onClick={()=>setNotesOrPlantsToggle("plants")}
+                    className="w-full cursor-pointer flex justify-center items-center">
+                     <p className="text-black">Plants</p>
+                    </div>
+                    <div onClick={()=>setNotesOrPlantsToggle("notes")} 
+                    className="w-full cursor-pointer flex bg-customOrange rounded-lg justify-center items-center">
+                     <p className="text-white">Notes</p>
+                    </div>
+                </div>
+            )
+        } else{
+            return(
+                <div className="inter flex justify-between bg-white w-36 h-12 mt-24 lg:mt-24 rounded-lg shadow-md">
+                    <div onClick={()=>setNotesOrPlantsToggle("plants")}
+                    className="w-full cursor-pointer flex bg-customOrange rounded-lg justify-center items-center">
+                     <p className="text-white">Plants</p>
+                    </div>
+                    <div onClick={()=>setNotesOrPlantsToggle("notes")} 
+                    className="w-full cursor-pointer flex justify-center items-center">
+                     <p>Notes</p>
+                    </div>
+                </div>
+            )
+        }
+    };
 
     const viewContainer = () => {
         if(formView === "add plant" || formView === "edit plant"){
@@ -159,16 +210,10 @@ function Dashboard ({session}) {
             return(<PlotForm session={session} closeButton={closeButton} />)
         } else if(formView === "edit account"){
             return(<AccountForm session={session} closeButton={closeButton} />)
+        } else if(formView === "view plant"){
+            return(<PlantView session={session} plantID={viewPlantID} closeButton={closeButton} />)
         }
     }
-
-    const handleSignOut = async () => {
-        // Sign out the user
-        await supabase.auth.signOut();
-    
-        // Redirect to the home page
-        navigate('/');
-      };
 
     if(fullyRegistered===false){
         return(
@@ -207,7 +252,6 @@ function Dashboard ({session}) {
                     </div>
                     </div>
                 </div>
-                {/* Mobile Menu */}
                 {isOpen && (
                     <div className="lg:hidden">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-md">
@@ -221,10 +265,8 @@ function Dashboard ({session}) {
                 )}
                 </header>
                 <div className="absolute top-12 max-w-full">{viewContainer()} </div>
-                <div>
-                    
-                </div>
-                <div className="mt-36">{plantData ? <PlantList plantData={plantData} /> : ""} </div> 
+                <div className="">{togglePlantsNotes()}</div>
+                <div className="mt-4">{plantData ? <PlantList plantData={plantData} plantID={setPlantID} /> : ""} </div> 
             </div>
         )
     }
