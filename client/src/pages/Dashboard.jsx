@@ -6,11 +6,8 @@ import PlotForm from "../components/PlotForm";
 import NoteForm from "../components/NoteForm";
 import loadingImg from '../images/bouncing-circles.svg';
 import { useNavigate } from "react-router-dom";
+import tempImage from '../images/temp-image.png';
 import { Link } from 'react-router-dom';
-import PlantList from "../components/PlantList";
-import plantIconBlack from '../images/plant-black.svg';
-import notebookIconBlack from '../images/notebook-black.svg';
-import weatherIcon from '../images/weather-image.svg';
 import PlantView from "../components/PlantView";
 
 function Dashboard ({session}) {
@@ -27,7 +24,7 @@ function Dashboard ({session}) {
     const [loadingPlotData, setLoadingPlotData] = useState(true);
     const [noteData, setNoteData] = useState();
     const [loadingNoteData, setLoadingNoteData] = useState(true);
-    const [formView, setFormView] = useState(false);
+    const [formView, setFormView] = useState("");
     const [isOpen, setIsOpen] = useState(false);
     const [isTransparent, setIsTransparent] = useState(true);
     const [notesOrPlantsToggle, setNotesOrPlantsToggle] = useState("plants")
@@ -165,7 +162,6 @@ function Dashboard ({session}) {
 
     const setPlantID = (data) => {
         if(data){
-            setFormView("")
             setViewPlantID(data)
             setFormView("view plant")
         }
@@ -202,6 +198,7 @@ function Dashboard ({session}) {
     };
 
     const viewContainer = () => {
+
         if(formView === "add plant" || formView === "edit plant"){
             return(<PlantForm session={session} closeButton={closeButton} />)
         } else if(formView === "add note"){
@@ -211,7 +208,7 @@ function Dashboard ({session}) {
         } else if(formView === "edit account"){
             return(<AccountForm session={session} closeButton={closeButton} />)
         } else if(formView === "view plant"){
-            return(<PlantView session={session} plantID={viewPlantID} closeButton={closeButton} />)
+            return(<PlantView key={viewPlantID} session={session} plantID={viewPlantID} closeButton={closeButton} />)
         }
     }
 
@@ -264,9 +261,26 @@ function Dashboard ({session}) {
                     </div>
                 )}
                 </header>
-                <div className="absolute top-12 max-w-full">{viewContainer()} </div>
+                <div className="absolute top-12">{viewContainer()} </div>
                 <div className="">{togglePlantsNotes()}</div>
-                <div className="mt-4">{plantData ? <PlantList plantData={plantData} plantID={setPlantID} /> : ""} </div> 
+                <div className="mt-4">
+                    <div className="grid lg:grid-cols-4 grid-cols-2 gap-4 ml-4 mr-4">
+                    {plantData.map(function(data) {
+                        return(
+                            <div key={data.id} 
+                            onClick={()=>setPlantID(data.id)}
+                            className="bg-customLightGreen p-4 rounded-lg shadow-md cursor-pointer">
+                                <div className='lg:h-60 lg:w-60 bg-cover bg-center overflow-hidden flex items-center'>
+                                {data.plant_image ? 
+                                <img className="w-full h-full object-cover" src={data.plant_image} /> : 
+                                <img className='w-full h-full object-cover' src={tempImage}></img>}
+                                </div>
+                                <p className="text-white font-bold text-xl mt-4">{data.plant_name}</p>
+                            </div>
+                        )
+                    })}
+                    </div>
+                </div> 
             </div>
         )
     }
