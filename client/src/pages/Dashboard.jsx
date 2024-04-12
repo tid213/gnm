@@ -28,11 +28,13 @@ function Dashboard ({session}) {
     const [isOpen, setIsOpen] = useState(false);
     const [isTransparent, setIsTransparent] = useState(true);
     const [notesOrPlantsToggle, setNotesOrPlantsToggle] = useState("plants")
-    const [viewPlantID, setViewPlantID] = useState();
+    const [viewPlantID, setViewPlantID] = useState("");
+    const [groupedPlants, setGroupedPlants] = useState({});
 
     useEffect(()=>{
         fetchUserInfo();
         fetchPlantData();
+        groupPlants();
         const handleScroll = () => {
             const scrollPosition = window.scrollY;
             if (scrollPosition > 0) {
@@ -108,6 +110,33 @@ function Dashboard ({session}) {
           }
     };
 
+    const groupPlants = () => {
+        const makeGroups = {};
+            if(plantData){
+                plantData.forEach(data => {
+                    const plot = data.plant_plot;
+                    if (!makeGroups[plot]) {
+                        makeGroups[plot] = [];
+                    }
+                    makeGroups[plot].push(data);
+                });
+                console.log(makeGroups)
+                setGroupedPlants(makeGroups)
+            }
+    }
+
+    const groupPlantsByPlot = (plantData) => {
+        const groupedPlants = {};
+        plantData.forEach(data => {
+            const plot = data.plant_plot;
+            if (!groupedPlants[plot]) {
+                groupedPlants[plot] = [];
+            }
+            groupedPlants[plot].push(data);
+        });
+        return groupedPlants;
+    };
+
     const fetchPlotData = async () => {
         try {
             setLoadingPlotData(true);
@@ -155,8 +184,10 @@ function Dashboard ({session}) {
     }
 
     const editButton = (data) => {
-        if(data){
+        if(data === "plant" || data === "note"){
             setFormView("edit " + data)
+        } else if(data === "close edit"){
+            setFormView("view plant")
         }
     };
 
@@ -199,16 +230,19 @@ function Dashboard ({session}) {
 
     const viewContainer = () => {
 
-        if(formView === "add plant" || formView === "edit plant"){
+        if(formView === "add plant"){
             return(<PlantForm session={session} closeButton={closeButton} />)
-        } else if(formView === "add note"){
+        } else if(formView === "edit plant"){
+            return(<PlantForm session={session} editButton={editButton} closeButton={closeButton} plantId={viewPlantID} />)
+        }
+         else if(formView === "add note"){
             return(<NoteForm session={session} closeButton={closeButton} />)
         } else if(formView === "add plot"){
             return(<PlotForm session={session} closeButton={closeButton} />)
         } else if(formView === "edit account"){
             return(<AccountForm session={session} closeButton={closeButton} />)
         } else if(formView === "view plant"){
-            return(<PlantView key={viewPlantID} session={session} plantID={viewPlantID} closeButton={closeButton} />)
+            return(<PlantView key={viewPlantID} session={session} plantID={viewPlantID} editButton={editButton} closeButton={closeButton} />)
         }
     }
 
@@ -261,25 +295,29 @@ function Dashboard ({session}) {
                     </div>
                 )}
                 </header>
-                <div className="absolute top-12">{viewContainer()} </div>
+                <div className="fixed top-12">{viewContainer()} </div>
                 <div className="">{togglePlantsNotes()}</div>
                 <div className="mt-4">
-                    <div className="grid lg:grid-cols-4 grid-cols-2 gap-4 ml-4 mr-4">
-                    {plantData.map(function(data) {
-                        return(
-                            <div key={data.id} 
-                            onClick={()=>setPlantID(data.id)}
-                            className="bg-customLightGreen p-4 rounded-lg shadow-md cursor-pointer">
-                                <div className='lg:h-60 lg:w-60 bg-cover bg-center overflow-hidden flex items-center'>
-                                {data.plant_image ? 
-                                <img className="w-full h-full object-cover" src={data.plant_image} /> : 
-                                <img className='w-full h-full object-cover' src={tempImage}></img>}
-                                </div>
-                                <p className="text-white font-bold text-xl mt-4">{data.plant_name}</p>
+                <div className="grid lg:grid-cols-4 grid-cols-1 gap-4 ml-4 mr-4">
+                    {Object.keys(groupedPlants).map(plot => (
+                        <div key={plot} className="lg:col-span-4">
+                            <div className="grid lg:grid-cols-4 grid-cols-1 gap-4">
+                                {groupedPlants[plot].map(data => (
+                                    <div key={data.id} onClick={() => setPlantID(data.id)} className="bg-customLightGreen p-4 rounded-lg shadow-md cursor-pointer">
+                                        <h1>{plot}</h1>
+                                        <div className='lg:h-60 lg:w-60 bg-cover bg-center overflow-hidden flex items-center'>
+                                            {data.plant_image ? 
+                                                <img className="w-full h-full object-cover" src={data.plant_image} alt="Plant Image" /> : 
+                                                <img className='w-full h-full object-cover' src={tempImage} alt="Temporary Image" />
+                                            }
+                                        </div>
+                                        <p className="text-white font-bold text-xl mt-4">{data.plant_name}</p>
+                                    </div>
+                                ))}
                             </div>
-                        )
-                    })}
-                    </div>
+                        </div>
+                    ))}
+                </div>
                 </div> 
             </div>
         )

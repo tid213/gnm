@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import tempImage from '../images/temp-image.png';
 
-function PlantView({session, plantID, closeButton}){
+function PlantView({session, plantID, closeButton, editButton}){
 
     const [plantData, setPlantData] = useState();
 
@@ -52,20 +52,21 @@ function PlantView({session, plantID, closeButton}){
                             </div>
                         </div>
                         <div className='lg:col-span-7 lg:flex gap-4'>
-                            <div className='lg:w-5/12 lg:mt-1 mt-4 w-auto cursor-pointer flex bg-customDarkGreen rounded-lg justify-center items-center'>
-                                <p className='text-xl font-bold text-white p-2'>Edit</p>
+                            <div onClick={()=>editButton("plant")}
+                                className='lg:w-5/12 lg:mt-1 mt-4 h-12 w-auto cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
+                                <p className='text-lg font-normal text-white p-2'>Edit</p>
                             </div>
-                            <div className='lg:w-5/12 mt-1 cursor-pointer flex bg-customMidGreen rounded-lg justify-center items-center'>
-                                <p className='text-xl font-bold text-white p-2'>Prune</p>
+                            <div className='lg:w-5/12 mt-1 h-12 cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
+                                <p className='text-lg font-normal text-white p-2'>Prune</p>
                             </div>
-                            <div className='lg:w-5/12 mt-1 cursor-pointer flex bg-customMidGreen rounded-lg justify-center items-center'>
-                                <p className='text-xl font-bold text-white p-2'>Fertilize</p>
+                            <div className='lg:w-5/12 mt-1 h-12 cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
+                                <p className='text-lg font-normal text-white p-2'>Fertilize</p>
                             </div>
-                            <div className='lg:w-5/12 mt-1 cursor-pointer flex bg-customMidGreen rounded-lg justify-center items-center'>
-                                <p className='text-xl font-bold text-white p-2'>Add image</p>
+                            <div className='lg:w-5/12 mt-1 h-12 cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
+                                <p className='text-lg font-normal text-white p-2'>Add image</p>
                             </div>
-                            <div className='w-auto mt-1 cursor-pointer flex bg-customOrange rounded-lg justify-center items-center'>
-                                <p className='text-xl font-bold text-white p-4'>Delete</p>
+                            <div className='w-auto mt-1 h-12 cursor-pointer flex bg-customOrange hover:bg-red-500 rounded-lg justify-center items-center'>
+                                <p className='text-lg font-bold text-white p-4'>Delete</p>
                             </div>
                         </div>
                 </div>

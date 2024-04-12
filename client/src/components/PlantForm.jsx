@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import { redirect } from "react-router-dom";
 
-const PlantForm = ({ plantId, session, closeButton }) => {
+const PlantForm = ({ plantId, session, closeButton, editButton }) => {
   const [plantName, setPlantName] = useState('');
   const [sunType, setSunType] = useState('Full Sun');
   const [waterFreq, setWaterFreq] = useState('');
@@ -17,21 +17,20 @@ const PlantForm = ({ plantId, session, closeButton }) => {
       try {
         // Fetch plant data if editing existing plant
         if (plantId) {
-          const { data: plantData, error } = await supabase
+          const { data, error } = await supabase
             .from('plants')
             .select('*')
             .eq('id', plantId)
           if (error) {
             throw error;
           }
-          const { plant_name, sun_type, water_freq, fert_freq, plant_plot, prune_freq, fertilizer_freq } = plantData;
-          setPlantName(plant_name);
-          setSunType(sun_type);
-          setWaterFreq(water_freq);
-          setFertFreq(fert_freq);
-          setPlantPlot(plant_plot);
-          setPruneFreq(prune_freq);
-          setFertilizerFreq(fertilizer_freq);
+          setPlantName(data[0].plant_name);
+          setSunType(data[0].sun_type ? data[0].sun_type : "");
+          setWaterFreq(data[0].water_freq ? data[0].water_freq : "");
+          setFertFreq(data[0].fert_freq ? data[0].fert_freq : "");
+          setPlantPlot(data[0].plant_plot ? data[0].plant_plot : "");
+          setPruneFreq(data[0].prune_freq ? data[0].prune_freq : "");
+          setFertilizerFreq(data[0].fertilizer_freq ? data[0].fertilizer_freq : "");
         }
 
         // Fetch plots data for dropdown
@@ -84,7 +83,8 @@ const PlantForm = ({ plantId, session, closeButton }) => {
 
   return (
     <div className='relative w-full inter mt-12 max-w-sm md:max-w-md mx-auto p-6 bg-white rounded-lg shadow-md'>
-     <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>
+     {plantId ? <div onClick={()=> editButton("close edit")} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div> :
+                <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>}
      <h2 className='text-2xl font-semibold mb-4'>Plant Form</h2>
      <form onSubmit={handleSubmit} className='lg:grid lg:grid-cols-2 lg:gap-4'>
       <div className='mb-4 lg:col-span-2'>
@@ -112,7 +112,7 @@ const PlantForm = ({ plantId, session, closeButton }) => {
             className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
             required
         >
-            <option value="">Select Frequency</option>
+            {waterFreq ? <option value={waterFreq}>{waterFreq}</option> : ""}
             <option value="Daily">Daily</option>
             <option value="Every other day">Every Two Days</option>
             <option value="Twice Weekly">Twice Weekly</option>
@@ -120,7 +120,17 @@ const PlantForm = ({ plantId, session, closeButton }) => {
             <option value="Monthly">Monthly</option>
         </select>
       </div>
-
+      <div className='mb-4'>
+        <label className='block text-gray-700'>Plant Plot:</label>
+        <select value={plantPlot} 
+        className='w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500'
+        onChange={(e) => setPlantPlot(e.target.value)} required>
+          <option value="">Select Plot</option>
+          {plots.map((plot) => (
+            <option key={plot.id} value={plot.name}>{plot.name}</option>
+          ))}
+        </select>
+      </div>
       <div className='mb-4'>
         <label className='block text-gray-700'>Fertilizing Frequency:</label>
         <select value={fertFreq} 
@@ -144,17 +154,6 @@ const PlantForm = ({ plantId, session, closeButton }) => {
           <option value="Three Months">Three Months</option>
           <option value="Six Months">Six Months</option>
           <option value="Yearly">Yearly</option>
-        </select>
-      </div>
-      <div className='mb-4'>
-        <label className='block text-gray-700'>Plant Plot:</label>
-        <select value={plantPlot} 
-        className='w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500'
-        onChange={(e) => setPlantPlot(e.target.value)} required>
-          <option value="">Select Plot</option>
-          {plots.map((plot) => (
-            <option key={plot.id} value={plot.name}>{plot.name}</option>
-          ))}
         </select>
       </div>
       <button  
