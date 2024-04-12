@@ -33,7 +33,7 @@ function PlantView({session, plantID, closeButton}){
                 <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>
                 <div className='lg:grid grid-cols-4 lg:grid-cols-7 grid-flow-row gap-4'>
                         <div className='lg:col-span-7'><h1 className="text-2xl font-bold inter text-customBrown">{plantData[0].plant_name}<b className="text-customOrange">.</b><b className="text-customMidGreen text-xl font-normal">plot/{plantData[0].plant_plot}</b></h1></div>
-                        <div className='lg:col-span-4'>{plantData[0].plant_image ? 
+                        <div className='lg:col-span-4 lg:flex items-center'>{plantData[0].plant_image ? 
                                                     <img src={plantData[0].plant_image}></img>:
                                                     <img src={tempImage}></img>}
                         </div>
