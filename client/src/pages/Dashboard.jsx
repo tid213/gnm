@@ -231,7 +231,7 @@ function Dashboard ({session}) {
     const viewContainer = () => {
 
         if(formView === "add plant"){
-            return(<PlantForm session={session} closeButton={closeButton} />)
+            return(<PlantForm session={session} editButton={editButton} closeButton={closeButton} />)
         } else if(formView === "edit plant"){
             return(<PlantForm session={session} editButton={editButton} closeButton={closeButton} plantId={viewPlantID} />)
         }
@@ -298,25 +298,21 @@ function Dashboard ({session}) {
                 <div className="fixed top-12">{viewContainer()} </div>
                 <div className="">{togglePlantsNotes()}</div>
                 <div className="mt-4">
-                <div className="grid lg:grid-cols-4 grid-cols-1 gap-4 ml-4 mr-4">
-                    {Object.keys(groupedPlants).map(plot => (
-                        <div key={plot} className="lg:col-span-4">
-                            <div className="grid lg:grid-cols-4 grid-cols-1 gap-4">
-                                {groupedPlants[plot].map(data => (
-                                    <div key={data.id} onClick={() => setPlantID(data.id)} className="bg-customLightGreen p-4 rounded-lg shadow-md cursor-pointer">
-                                        <h1>{plot}</h1>
-                                        <div className='lg:h-60 lg:w-60 bg-cover bg-center overflow-hidden flex items-center'>
-                                            {data.plant_image ? 
-                                                <img className="w-full h-full object-cover" src={data.plant_image} alt="Plant Image" /> : 
-                                                <img className='w-full h-full object-cover' src={tempImage} alt="Temporary Image" />
-                                            }
-                                        </div>
-                                        <p className="text-white font-bold text-xl mt-4">{data.plant_name}</p>
+                <div className="grid lg:grid-cols-4 grid-cols-1 gap-8 ml-4 mr-4">
+                    {plantData.map(function(data) {
+                            return(
+                                <div key={data.id} 
+                                onClick={()=>setPlantID(data.id)}
+                                className="bg-white inter p-4 rounded-lg shadow-md cursor-pointer">
+                                    <div className='lg:h-52 lg:w-52  bg-cover bg-center overflow-hidden flex items-center'>
+                                    {data.plant_image ? 
+                                    <img className="w-full h-full object-cover overflow-hidden" src={data.plant_image} /> : 
+                                    <img className='w-full h-full object-cover overflow-hidden' src={tempImage}></img>}
                                     </div>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
+                                    <p className="text-customMidGreen font-medium text-xl mt-4">{data.plant_name}</p>
+                                </div>
+                            )
+                        })}
                 </div>
                 </div> 
             </div>
