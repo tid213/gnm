@@ -26,6 +26,8 @@ function PlantView({session, plantID, closeButton, editButton}){
         fetchPlantData();
     }, [])
 
+    
+
     return(
         <div>
             {plantData ? 
@@ -38,35 +40,33 @@ function PlantView({session, plantID, closeButton, editButton}){
                                                     <img src={tempImage}></img>}
                         </div>
                         <div className='lg:col-span-3'>
-                            <h3 className='mb-4 text-2xl font-bold text-customDarkGreen mt-4 lg:mt-0'>Plant details</h3>
-                            <div className='grid grid-cols-2 lg:grid-cols-none'>
+                            <div className='grid grid-cols-2 lg:grid-cols-none mt-4'>
                                 <div>
+                                <p className='font-bold lg:block hidden'>Plot location:</p><p className='lg:mb-4 mb-2 hidden lg:block'>{plantData[0].plant_plot}</p>
                                     <p className='font-bold'>Water frequency:</p><p className='lg:mb-4 mb-2'>{plantData[0].water_freq}</p>
                                     <p className='font-bold'>Last fertilized:</p><p className='lg:mb-4 mb-2'>{plantData[0].fert_date ? plantData[0].fert_date : "Edit plant to add" }</p>
                                     <p className='font-bold'>Last pruned:</p><p className='lg:mb-4 mb-2'>{plantData[0].prune_date ? plantData[0].prune_date : "Edit plant to add" }</p>
                                 </div>
                                 <div>
+                                    <p className='font-bold lg:hidden'>Plot location:</p><p className='lg:mb-4 mb-2 lg:hidden'>{plantData[0].plant_plot}</p>
                                     <p className='font-bold'>Fertilize frequency:</p><p className='lg:mb-4 mb-2'>{plantData[0].fert_freq ? plantData[0].fert_freq : "Edit plant to add"}</p>
                                     <p className='font-bold'>Prune frequency:</p><p className='lg:mb-4 mb-2'>{plantData[0].prune_freq ? plantData[0].prune_freq : "Edit plant to add"}</p>
                                 </div>
                             </div>
                         </div>
-                        <div className='lg:col-span-7 lg:flex gap-4'>
+                        <div className='lg:col-span-7  lg:flex-nowrap flex-wrap lg:flex gap-4'>
                             <div onClick={()=>editButton("plant")}
-                                className='lg:w-5/12 lg:mt-1 mt-4 h-12 w-auto cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
+                                className='lg:w-5/12 lg:mt-1 lg:p-0 p-4 mt-1 h-12 w-auto cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
                                 <p className='text-lg font-normal text-white p-2'>Edit</p>
                             </div>
-                            <div className='lg:w-5/12 mt-1 h-12 cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
+                            <div className='lg:w-5/12 lg:p-0 p-4 mt-1 h-12 cursor-pointer flex bg-customMidGreen border-2 border-customLightGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
                                 <p className='text-lg font-normal text-white p-2'>Prune</p>
                             </div>
-                            <div className='lg:w-5/12 mt-1 h-12 cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
+                            <div className='lg:w-5/12 lg:p-0 p-4 mt-1 h-12 cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
                                 <p className='text-lg font-normal text-white p-2'>Fertilize</p>
                             </div>
-                            <div className='lg:w-5/12 mt-1 h-12 cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
+                            <div className='lg:w-5/12 lg:p-0 p-4 mt-1 h-12 cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
                                 <p className='text-lg font-normal text-white p-2'>Add image</p>
-                            </div>
-                            <div className='w-auto mt-1 h-12 cursor-pointer flex bg-customOrange hover:bg-red-500 rounded-lg justify-center items-center'>
-                                <p className='text-lg font-bold text-white p-4'>Delete</p>
                             </div>
                         </div>
                 </div>

@@ -7,8 +7,11 @@ import NoteForm from "../components/NoteForm";
 import loadingImg from '../images/bouncing-circles.svg';
 import { useNavigate } from "react-router-dom";
 import tempImage from '../images/temp-image.png';
+import tempPlotImage from '../images/garden-plot.png';
 import { Link } from 'react-router-dom';
 import PlantView from "../components/PlantView";
+import ViewToggle from "../components/ViewToggle";
+import PlotView from "../components/PlotView";
 
 function Dashboard ({session}) {
 
@@ -27,13 +30,15 @@ function Dashboard ({session}) {
     const [formView, setFormView] = useState("");
     const [isOpen, setIsOpen] = useState(false);
     const [isTransparent, setIsTransparent] = useState(true);
-    const [notesOrPlantsToggle, setNotesOrPlantsToggle] = useState("plants")
+    const [toggle, setToggle] = useState("plants")
     const [viewPlantID, setViewPlantID] = useState("");
+    const [viewPlotID, setViewPlotID] = useState("");
     const [groupedPlants, setGroupedPlants] = useState({});
 
     useEffect(()=>{
         fetchUserInfo();
         fetchPlantData();
+        fetchPlotData();
         groupPlants();
         const handleScroll = () => {
             const scrollPosition = window.scrollY;
@@ -120,7 +125,6 @@ function Dashboard ({session}) {
                     }
                     makeGroups[plot].push(data);
                 });
-                console.log(makeGroups)
                 setGroupedPlants(makeGroups)
             }
     }
@@ -198,51 +202,76 @@ function Dashboard ({session}) {
         }
     };
 
-    const togglePlantsNotes = () => {
-        if(notesOrPlantsToggle === "notes"){
-            return(
-                <div className="inter flex justify-between bg-white w-36 h-12 mt-24 rounded-lg shadow-md">
-                    <div onClick={()=>setNotesOrPlantsToggle("plants")}
-                    className="w-full cursor-pointer flex justify-center items-center">
-                     <p className="text-black">Plants</p>
-                    </div>
-                    <div onClick={()=>setNotesOrPlantsToggle("notes")} 
-                    className="w-full cursor-pointer flex bg-customOrange rounded-lg justify-center items-center">
-                     <p className="text-white">Notes</p>
-                    </div>
-                </div>
-            )
-        } else{
-            return(
-                <div className="inter flex justify-between bg-white w-36 h-12 mt-24 lg:mt-24 rounded-lg shadow-md">
-                    <div onClick={()=>setNotesOrPlantsToggle("plants")}
-                    className="w-full cursor-pointer flex bg-customOrange rounded-lg justify-center items-center">
-                     <p className="text-white">Plants</p>
-                    </div>
-                    <div onClick={()=>setNotesOrPlantsToggle("notes")} 
-                    className="w-full cursor-pointer flex justify-center items-center">
-                     <p>Notes</p>
-                    </div>
-                </div>
-            )
+    const setPlotID = (data) => {
+        if(data){
+            setViewPlotID(data)
+            setFormView("view plot")
         }
+    }
+
+    const togglePPN = (data) => {
+        setToggle(data);
     };
 
-    const viewContainer = () => {
+    const showPPN = () => {
+        if(toggle === "plants"){
+            return(
+                <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-8 gap-4 ml-4 mr-4">
+                    {plantData.map(function(data) {
+                            return(
+                                <div key={data.id} 
+                                onClick={()=>setPlantID(data.id)}
+                                className="bg-white inter p-4 rounded-lg shadow-md cursor-pointer">
+                                    <div className='lg:h-52 lg:w-52 h-40 w-38 bg-cover bg-center overflow-hidden flex items-center'>
+                                    {data.plant_image ? 
+                                    <img className="w-full h-full object-cover overflow-hidden" src={data.plant_image} /> : 
+                                    <img className='w-full h-full object-cover overflow-hidden' src={tempImage}></img>}
+                                    </div>
+                                    <p className="text-customMidGreen font-medium text-xl mt-4">{data.plant_name}</p>
+                                </div>
+                            )
+                        })}
+                </div>
+            )
+        } else if(toggle === "plots"){
+            return(
+                <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-8 gap-4 ml-4 mr-4">
+                    {plotData.map(function(data) {
+                            return(
+                                <div key={data.id} 
+                                onClick={()=>setPlotID(data.id)}
+                                className="bg-white inter p-4 rounded-lg shadow-md cursor-pointer">
+                                    <div className='lg:h-52 lg:w-52 h-40 w-38 bg-cover bg-center overflow-hidden flex items-center'>
+                                    {data.plot_image ? 
+                                    <img className="w-full h-full object-cover overflow-hidden" src={data.plot_image} /> : 
+                                    <img className='w-full h-full object-cover overflow-hidden' src={tempPlotImage}></img>}
+                                    </div>
+                                    <p className="text-customMidGreen font-medium text-xl mt-4">{data.name}</p>
+                                </div>
+                            )
+                        })}
+                </div>
+            )
+        }
+    }
 
+    const viewContainer = () => {
         if(formView === "add plant"){
             return(<PlantForm session={session} editButton={editButton} closeButton={closeButton} />)
-        } else if(formView === "edit plant"){
-            return(<PlantForm session={session} editButton={editButton} closeButton={closeButton} plantId={viewPlantID} />)
-        }
-         else if(formView === "add note"){
+        }  else if(formView === "add note"){
             return(<NoteForm session={session} closeButton={closeButton} />)
         } else if(formView === "add plot"){
             return(<PlotForm session={session} closeButton={closeButton} />)
         } else if(formView === "edit account"){
             return(<AccountForm session={session} closeButton={closeButton} />)
+        } else if(formView === "edit plant"){
+            return(<PlantForm session={session} editButton={editButton} closeButton={closeButton} plantID={viewPlantID} />)
+        } else if(formView === "edit plot"){
+            return(<PlotForm session={session} editButton={editButton} closeButton={closeButton} plotID={viewPlotID} />)
         } else if(formView === "view plant"){
             return(<PlantView key={viewPlantID} session={session} plantID={viewPlantID} editButton={editButton} closeButton={closeButton} />)
+        } else if(formView === "view plot"){
+            return(<PlotView key={viewPlotID} session={session} plotID={viewPlotID} editButton={editButton} closeButton={closeButton} />)
         }
     }
 
@@ -296,24 +325,9 @@ function Dashboard ({session}) {
                 )}
                 </header>
                 <div className="fixed top-12">{viewContainer()} </div>
-                <div className="">{togglePlantsNotes()}</div>
+                <div className="">{<ViewToggle togglePPN={togglePPN} />}</div>
                 <div className="mt-4">
-                <div className="grid lg:grid-cols-4 grid-cols-1 gap-8 ml-4 mr-4">
-                    {plantData.map(function(data) {
-                            return(
-                                <div key={data.id} 
-                                onClick={()=>setPlantID(data.id)}
-                                className="bg-white inter p-4 rounded-lg shadow-md cursor-pointer">
-                                    <div className='lg:h-52 lg:w-52  bg-cover bg-center overflow-hidden flex items-center'>
-                                    {data.plant_image ? 
-                                    <img className="w-full h-full object-cover overflow-hidden" src={data.plant_image} /> : 
-                                    <img className='w-full h-full object-cover overflow-hidden' src={tempImage}></img>}
-                                    </div>
-                                    <p className="text-customMidGreen font-medium text-xl mt-4">{data.plant_name}</p>
-                                </div>
-                            )
-                        })}
-                </div>
+                <div>{showPPN()}</div>
                 </div> 
             </div>
         )

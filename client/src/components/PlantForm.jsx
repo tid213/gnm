@@ -87,13 +87,13 @@ const PlantForm = ({ plantId, session, closeButton, editButton }) => {
                 <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>}
      <h2 className='text-2xl font-semibold mb-4'>Plant Form</h2>
      <form onSubmit={handleSubmit} className='lg:grid lg:grid-cols-2 lg:gap-4'>
-      <div className='mb-4 lg:col-span-2'>
+      <div className='mt-4 lg:mt-0 lg:col-span-2'>
         <label className="block text-gray-700">Plant Name:</label>
         <input type="text" value={plantName} 
         className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
         onChange={(e) => setPlantName(e.target.value)} required />
       </div>
-      <div className='mb-4 lg:col-span-2'>
+      <div className='mt-4 lg:mt-0 lg:col-span-2'>
         <label className="block text-gray-700">Sun Type:</label>
         <select value={sunType} 
         className='w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500'
@@ -104,7 +104,7 @@ const PlantForm = ({ plantId, session, closeButton, editButton }) => {
           <option value="Full Shade">Full Shade</option>
         </select>
       </div>
-      <div className='mb-4'>
+      <div className='mt-4 lg:mt-0'>
         <label className='block text-gray-700'>Watering Frequency:</label>
         <select
             value={waterFreq}
@@ -120,7 +120,7 @@ const PlantForm = ({ plantId, session, closeButton, editButton }) => {
             <option value="Monthly">Monthly</option>
         </select>
       </div>
-      <div className='mb-4'>
+      <div className='mt-4 lg:mt-0'>
         <label className='block text-gray-700'>Plant Plot:</label>
         <select value={plantPlot} 
         className='w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500'
@@ -131,7 +131,7 @@ const PlantForm = ({ plantId, session, closeButton, editButton }) => {
           ))}
         </select>
       </div>
-      <div className='mb-4'>
+      <div className='mt-4 lg:mt-0'>
         <label className='block text-gray-700'>Fertilizing Frequency:</label>
         <select value={fertFreq} 
         className='w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500'
@@ -144,7 +144,7 @@ const PlantForm = ({ plantId, session, closeButton, editButton }) => {
           <option value="Yearly">Yearly</option>
         </select>
       </div>
-      <div className='mb-4'>
+      <div className='mt-4 lg:mt-0'>
         <label className='block text-gray-700'>Pruning Frequency:</label>
         <select value={pruneFreq} 
         className='w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500'
@@ -157,8 +157,10 @@ const PlantForm = ({ plantId, session, closeButton, editButton }) => {
         </select>
       </div>
       <button  
-      className="mt-4 w-full lg:col-span-2 bg-customOrange hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
-      type="submit">Save Plant</button>
+      className="mt-4 lg:mt-0 w-full lg:col-span-2 bg-customOrange hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
+      type="submit">Save Plant
+      </button>
+      {plantId ? <div className="mt-4 lg:mt-0 w-full lg:col-span-2 bg-black hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">Delete Plant</div> : ""}
     </form>
     </div>
   );
