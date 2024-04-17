@@ -188,7 +188,7 @@ function Dashboard ({session}) {
     }
 
     const editButton = (data) => {
-        if(data === "plant" || data === "note"){
+        if(data === "plant" || data === "note" || data === "plot"){
             setFormView("edit " + data)
         } else if(data === "close edit"){
             setFormView("view plant")
@@ -265,9 +265,9 @@ function Dashboard ({session}) {
         } else if(formView === "edit account"){
             return(<AccountForm session={session} closeButton={closeButton} />)
         } else if(formView === "edit plant"){
-            return(<PlantForm session={session} editButton={editButton} closeButton={closeButton} plantID={viewPlantID} />)
+            return(<PlantForm session={session} editButton={editButton} closeButton={closeButton} plantId={viewPlantID} />)
         } else if(formView === "edit plot"){
-            return(<PlotForm session={session} editButton={editButton} closeButton={closeButton} plotID={viewPlotID} />)
+            return(<PlotForm session={session} editButton={editButton} closeButton={closeButton} plotId={viewPlotID} />)
         } else if(formView === "view plant"){
             return(<PlantView key={viewPlantID} session={session} plantID={viewPlantID} editButton={editButton} closeButton={closeButton} />)
         } else if(formView === "view plot"){

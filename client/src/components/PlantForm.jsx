@@ -12,6 +12,10 @@ const PlantForm = ({ plantId, session, closeButton, editButton }) => {
   const [fertilizerFreq, setFertilizerFreq] = useState('Two weeks');
   const [plots, setPlots] = useState([]);
 
+  const refreshPage = ()=>{
+    window.location.reload();
+   }
+
   useEffect(() => {
     const fetchPlantData = async () => {
       try {
@@ -55,6 +59,7 @@ const PlantForm = ({ plantId, session, closeButton, editButton }) => {
     try {
       // Insert or update plant data
       const plantData = {
+        id: plantId,
         plant_name: plantName,
         sun_type: sunType,
         water_freq: waterFreq,
@@ -63,19 +68,12 @@ const PlantForm = ({ plantId, session, closeButton, editButton }) => {
         prune_freq: pruneFreq,
         fertilizer_freq: fertilizerFreq
       };
+      console.log(plantData)
       let { error } = await supabase.from('plants').upsert(plantData, { returning: 'minimal' });
       if (error) {
         throw error;
       }
-      console.log('Plant data saved successfully');
-      // Reset form inputs after submission
-      setPlantName('');
-      setSunType('Full Sun');
-      setWaterFreq('');
-      setFertFreq('');
-      setPlantPlot('');
-      setPruneFreq('Monthly');
-      setFertilizerFreq('Two weeks');
+      refreshPage();
     } catch (error) {
       console.error('Error saving plant data:', error.message);
     }

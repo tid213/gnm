@@ -8,7 +8,12 @@ const PlotForm = ({ plotId, session, closeButton }) => {
   const [soilPh, setSoilPh] = useState('');
   const [userPlots, setUserPlots] = useState([]);
 
+  const refreshPage = ()=>{
+    window.location.reload();
+  }
+
   useEffect(() => {
+    console.log(plotId)
     const fetchPlotData = async () => {
       try {
         // Fetch plot data if editing existing plot
@@ -20,11 +25,10 @@ const PlotForm = ({ plotId, session, closeButton }) => {
           if (error) {
             throw error;
           }
-          const { name, sun_type, soil_type, soil_ph } = data;
-          setName(name);
-          setSunType(sun_type);
-          setSoilType(soil_type);
-          setSoilPh(soil_ph);
+          setName(data[0].name);
+          setSunType(data[0].sun_type ? data[0].sun_type : "");
+          setSoilType(data[0].soil_type ? data[0].soil_type : "");
+          setSoilPh(data[0].soil_ph ? data[0].soil_ph : "");
         }
 
         // Fetch user's plots from Supabase
@@ -49,22 +53,18 @@ const PlotForm = ({ plotId, session, closeButton }) => {
     try {
       // Insert or update plot data
       const plotData = {
+        id: plotId,
         name,
         sun_type: sunType,
         soil_type: soilType,
         soil_ph: parseInt(soilPh),
-        user_id: session.user.id
+        
       };
       const { error } = await supabase.from('plots').upsert(plotData, { returning: 'minimal' });
       if (error) {
         throw error;
       }
-      console.log('Plot data saved successfully');
-      // Reset form inputs after submission
-      setName('');
-      setSunType('Full Sun');
-      setSoilType('');
-      setSoilPh('');
+      refreshPage();
     } catch (error) {
       console.error('Error saving plot data:', error.message);
     }
