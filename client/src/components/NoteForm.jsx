@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 
 const NoteForm = ({session, closeButton}) => {
-  const [noteType, setNoteType] = useState('General');
+  const [noteType, setNoteType] = useState('Garden');
   const [noteFor, setNoteFor] = useState('');
   const [note, setNote] = useState('');
   const [noteLink, setNoteLink] = useState('');
@@ -17,7 +17,11 @@ const NoteForm = ({session, closeButton}) => {
     }
     return result;
   };
-  
+
+  const refreshPage = ()=>{
+    window.location.reload();
+   }
+
 
   useEffect(() => {
     const fetchUserPlantsAndPlots = async () => {
@@ -75,7 +79,7 @@ const NoteForm = ({session, closeButton}) => {
       setNoteLink('');
     } catch (error) {
       console.error('Error saving note data:', error.message);
-    }
+    } refreshPage();
   };
 
   return (
@@ -88,7 +92,7 @@ const NoteForm = ({session, closeButton}) => {
         <select value={noteType} 
         className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
         onChange={(e) => handleNoteTypeChange(e.target.value)} required>
-          <option value="General">Garden Note</option>
+          <option value="Garden">Garden</option>
           <option value="Plant">Plant Note</option>
           <option value="Plot">Plot Note</option>
         </select>

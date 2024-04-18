@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 
 function ImageForm({imageFor, imageForId, close}){
     const [file, setFile] = useState(null);
-    const [extension, setExtension] = useState(null);
     const [fileLink, setFileLink] = useState();
+    const [chooseImage, setChooseImage] = useState("Choose Image File")
 
     useEffect(()=>{
         console.log(imageForId)
@@ -45,7 +45,7 @@ function ImageForm({imageFor, imageForId, close}){
         console.log(link)
           const {  error} = await supabase
             .from('plots')
-            .update({plant_image: link})
+            .update({plot_image: link})
             .eq('id', imageForId)
           if(error){
             console.log(error)
@@ -127,8 +127,8 @@ function ImageForm({imageFor, imageForId, close}){
     const fileName = createFileName() + "." + fileExtension;
     // Changing file state
     setFile(file);
-    setExtension(fileExtension);
     setFileLink(fileName);
+    setChooseImage("Image Selected")
     console.log(fileName);
   };
   
@@ -137,10 +137,10 @@ function ImageForm({imageFor, imageForId, close}){
         <p className="mt-2 mb-2 font-semibold text-customMidGreen text-2xl">Upload image</p>
         <div className="upload-image mt-4">
             <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" id="fileInput" />
-            <label htmlFor="fileInput" className=" w-full bg-customLightGreen hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block cursor-pointer">
-                Choose Image File
+            <label htmlFor="fileInput" className=" w-full bg-customLightGreen hover:bg-customMidGreen text-white font-bold py-2 px-4 rounded inline-block cursor-pointer">
+                {chooseImage}
             </label>
-            <button onClick={uploadFile} className="w-full lg:ml-4 mt-2 lg:mt-0 bg-customMidGreen hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-block cursor-pointer">
+            <button onClick={uploadFile} className="w-full lg:ml-4 mt-2 lg:mt-0 bg-customMidGreen hover:bg-customDarkGreen text-white font-bold py-2 px-4 rounded inline-block cursor-pointer">
                 Upload
             </button>
             <div className="close-button cursor-pointer mt-8 w-full bg-customOrange hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline" onClick={() => close('close')}>Close</div>

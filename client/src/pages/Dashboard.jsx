@@ -33,12 +33,14 @@ function Dashboard ({session}) {
     const [toggle, setToggle] = useState("plants")
     const [viewPlantID, setViewPlantID] = useState("");
     const [viewPlotID, setViewPlotID] = useState("");
+    const [viewNoteID, setViewNoteID] = useState("");
     const [groupedPlants, setGroupedPlants] = useState({});
 
     useEffect(()=>{
         fetchUserInfo();
         fetchPlantData();
         fetchPlotData();
+        fetchNoteData();
         groupPlants();
         const handleScroll = () => {
             const scrollPosition = window.scrollY;
@@ -209,15 +211,28 @@ function Dashboard ({session}) {
         }
     }
 
+    const setNoteID = (data) => {
+        if(data){
+            setViewNoteID(data)
+            setFormView("view note")
+        }
+    }
+
     const togglePPN = (data) => {
         setToggle(data);
+    };
+
+    const formatDate = (dateString) => {
+        const options = { month: 'long', day: 'numeric', year: 'numeric' };
+        const formattedDate = new Date(dateString).toLocaleDateString('en-US', options);
+        return formattedDate;
     };
 
     const showPPN = () => {
         if(toggle === "plants"){
             return(
                 <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-8 gap-4 ml-4 mr-4">
-                    {plantData.map(function(data) {
+                    {plantData.slice().reverse().map(function(data) {
                             return(
                                 <div key={data.id} 
                                 onClick={()=>setPlantID(data.id)}
@@ -236,7 +251,7 @@ function Dashboard ({session}) {
         } else if(toggle === "plots"){
             return(
                 <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-8 gap-4 ml-4 mr-4">
-                    {plotData.map(function(data) {
+                    {plotData.slice().reverse().map(function(data) {
                             return(
                                 <div key={data.id} 
                                 onClick={()=>setPlotID(data.id)}
@@ -250,6 +265,28 @@ function Dashboard ({session}) {
                                 </div>
                             )
                         })}
+                </div>
+            )
+        } else if(toggle === "notes"){
+            return(
+                <div className="grid lg:grid-cols-5 grid-cols-2 lg:gap-4 gap-4 ml-4 mr-4">
+                    {noteData.slice().reverse().map(function(data) {
+                        return (
+                            <div key={data.id} 
+                                onClick={() => setNoteID(data.id)}
+                                className="lg:h-52 lg:w-52 min-h-40 w-38 bg-white inter p-4 rounded-lg shadow-md cursor-pointer">
+                                <p className="text-customDarkGreen ">
+                                    {data.note_type}
+                                    <b className="text-customOrange">.</b>
+                                    <span className="text-customMidGreen font-medium text-lg ">
+                                        {data.note_for ? data.note_for : "Notebook"}
+                                    </span>
+                                </p>
+                                <p>{formatDate(data.created_at)}</p>
+                                <p className="text-customMidGreen  mt-4">{data.note}</p>
+                            </div>
+                        );
+                    })}
                 </div>
             )
         }

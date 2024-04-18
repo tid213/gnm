@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import tempImage from '../images/garden-plot.png';
+import ImageForm from './ImageForm';
 
 function PlotView({plotID, session, closeButton, editButton}){
 
     const [plotData, setPlotData] = useState("");
     const [plantList, setPlantList] = useState();
+    const [imageView, setImageView] = useState("image");
 
     const fetchPlotData = async () =>{
         try{
@@ -50,6 +52,20 @@ function PlotView({plotID, session, closeButton, editButton}){
         }
     }, [plotData]);
 
+    const showImage = () => {
+        if(plotData[0].plot_image){
+            return(<img src={plotData[0].plot_image}></img>);
+        } else{
+            return(<img src={tempImage}></img>);
+        }
+    };
+
+    const close = (data) => {
+        if(data === 'close'){
+            setImageView("image")
+        }
+    }
+
     return(
         <div>
             {plotData ? 
@@ -57,9 +73,10 @@ function PlotView({plotID, session, closeButton, editButton}){
                     <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>
                     <div className='lg:grid grid-cols-4 lg:grid-cols-7 grid-flow-row gap-4'>
                         <div className='lg:col-span-7'><h1 className="text-2xl font-bold inter text-customBrown">{plotData[0].name}<b className="text-customOrange">.</b></h1></div>
-                        <div className='lg:col-span-4 lg:flex items-center'>{plotData[0].plot_image ? 
-                                                    <img src={plotData[0].plot_image}></img>:
-                                                    <img src={tempImage}></img>}
+                        <div className='lg:col-span-4 lg:flex items-center'>
+                            {imageView === "upload" ? 
+                                <ImageForm imageFor={"plot"} imageForId={plotID} close={close} /> 
+                                : showImage()}
                         </div>
                         <div className='lg:col-span-3 grid grid-cols-2 mt-4 '>
                             <div className='lg:col-span-1 lg:mt-0 lg:flex-none flex flex-col '>
@@ -88,6 +105,10 @@ function PlotView({plotID, session, closeButton, editButton}){
                             <div onClick={()=>editButton("plot")}
                                 className='lg:w-5/12 lg:mt-1 lg:p-0 p-4 mt-1 h-12 w-auto cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
                                 <p className='text-lg font-normal text-white p-2'>Edit Plot</p>
+                            </div>
+                            <div onClick={()=>setImageView("upload")}
+                                className='lg:w-5/12 lg:mt-1 lg:p-0 p-4 mt-1 h-12 w-auto cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
+                                <p className='text-lg font-normal text-white p-2'>Add Image</p>
                             </div>
                             <div className='lg:w-5/12 lg:p-0 p-4 mt-1 h-12 cursor-pointer flex bg-customOrange hover:bg-custom-red-500 rounded-lg justify-center items-center'>
                                 <p className='text-lg font-normal text-white p-2'>Delete Plot</p>
