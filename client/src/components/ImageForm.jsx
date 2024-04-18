@@ -1,37 +1,66 @@
 import AWS from "aws-sdk";
 import { supabase } from '../supabaseClient'
+import { useState, useEffect } from "react";
 
-function ImageForm({imageFor, imageForId, closeButton}){
+function ImageForm({imageFor, imageForId, close}){
     const [file, setFile] = useState(null);
-    const [randomNum, setRandomNum]= useState()
+    const [extension, setExtension] = useState(null);
+    const [fileLink, setFileLink] = useState();
 
     useEffect(()=>{
-        createFileName();
+        console.log(imageForId)
     }, [])
 
     const refreshPage = ()=>{
       window.location.reload();
    }
 
-    const setPlantImage = async (link) => {
+    const setNoteImage = async (link) => {
       console.log(link)
         const {  error} = await supabase
-          .from('plants')
-          .update({plant_image: link})
-          .eq('id', data.id)
+          .from('notes')
+          .update({note_image: link})
+          .eq('id', imageForId)
         if(error){
           console.log(error)
         } else{
           console.log("link added")
         }
     }
+
+    const setPlantImage = async (link) => {
+        console.log(link)
+          const {  error} = await supabase
+            .from('plants')
+            .update({plant_image: link})
+            .eq('id', imageForId)
+          if(error){
+            console.log(error)
+          } else{
+            console.log("link added")
+          }
+      }
+
+      const setPlotImage = async (link) => {
+        console.log(link)
+          const {  error} = await supabase
+            .from('plots')
+            .update({plant_image: link})
+            .eq('id', imageForId)
+          if(error){
+            console.log(error)
+          } else{
+            console.log("link added")
+          }
+      }
+
     const createFileName = () => {
         const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         let result = '';
         for (let i = 0; i < 15; i++) {
         result += characters.charAt(Math.floor(Math.random() * characters.length));
         }
-        setRandomNum(result)
+        return result;
     }
 
   // Function to upload file to s3
@@ -58,7 +87,7 @@ function ImageForm({imageFor, imageForId, closeButton}){
 
     const params = {
       Bucket: S3_BUCKET,
-      Key: randomNum,
+      Key: fileLink,
       Body: file,
     };
 
@@ -76,8 +105,15 @@ function ImageForm({imageFor, imageForId, closeButton}){
 
     await upload.then((err, data) => {
       console.log(err);
-      let imageLink = "https://garden-notes-images.s3.us-west-1.amazonaws.com/" + randomNum;
-      setPlantImage(imageLink)
+      let imageLink = "https://garden-notes-images.s3.us-west-1.amazonaws.com/" + fileLink;
+      if(imageFor === "note"){
+        setNoteImage(imageLink)
+      } else if(imageFor === "plant"){
+        setPlantImage(imageLink)
+      } else if(imageFor === "plot"){
+        setPlotImage(imageLink)
+      }
+      
       // Fille successfully uploaded
       alert("File uploaded successfully.");
       refreshPage()
@@ -87,21 +123,30 @@ function ImageForm({imageFor, imageForId, closeButton}){
   const handleFileChange = (e) => {
     // Uploaded file
     const file = e.target.files[0];
+    const fileExtension = file.name.split('.').pop();
+    const fileName = createFileName() + "." + fileExtension;
     // Changing file state
     setFile(file);
+    setExtension(fileExtension);
+    setFileLink(fileName);
+    console.log(fileName);
   };
+  
   return (
-    <div className='upload'>
-      <div className='close-button' onClick={() => editPlantClose(true)}>Close</div>
-      <div className='plant-title'>
-         <span><b>{data.plant_name}</b></span>
-      </div>
-      <p>Add or change plant image</p>
-      <div className="upload-image">
-        <input type="file" onChange={handleFileChange} />
-        <button onClick={uploadFile}>Upload</button>
-      </div>
+    <div className="upload inter ml-4 mr-4 p-8 bg-white border border-customMidGreen rounded-lg shadow-md">
+        <p className="mt-2 mb-2 font-semibold text-customMidGreen text-2xl">Upload image</p>
+        <div className="upload-image mt-4">
+            <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" id="fileInput" />
+            <label htmlFor="fileInput" className=" w-full bg-customLightGreen hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block cursor-pointer">
+                Choose Image File
+            </label>
+            <button onClick={uploadFile} className="w-full lg:ml-4 mt-2 lg:mt-0 bg-customMidGreen hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-block cursor-pointer">
+                Upload
+            </button>
+            <div className="close-button cursor-pointer mt-8 w-full bg-customOrange hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline" onClick={() => close('close')}>Close</div>
+        </div>
     </div>
+
   );
 }
 

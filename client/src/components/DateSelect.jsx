@@ -35,7 +35,7 @@ function DateSelect({plantId, pruneOrFert, close}){
 
     if (pruneOrFert === "prune") {
         return (
-            <div className="w-full p-4 border border-customMidGreen bg-white rounded-lg shadow-md">
+            <div className="w-full p-4 ml-4 mr-4 border border-customMidGreen bg-white rounded-lg shadow-md">
                 <div className="form-title mt-4">
                     <p className="inter text-xl font-normal text-black">Select last time plant was pruned</p>
                 </div>
@@ -49,7 +49,7 @@ function DateSelect({plantId, pruneOrFert, close}){
         );
     } else {
         return (
-            <div className="p-4 border border-customMidGreen bg-white rounded-lg shadow-md">
+            <div className="p-4 ml-4 mr-4 border border-customMidGreen bg-white rounded-lg shadow-md">
                 <div className="form-title mt-4">
                     <p className="inter text-xl font-normal text-black">Select last time plant was fertilized:</p>
                 </div>

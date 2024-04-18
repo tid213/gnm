@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import tempImage from '../images/temp-image.png';
 import DateSelect from './DateSelect';
+import ImageForm from './ImageForm';
 
 function PlantView({session, plantID, closeButton, editButton}){
 
@@ -35,6 +36,8 @@ function PlantView({session, plantID, closeButton, editButton}){
             setDateAndImageView("prune")
         } else if(data === "close"){
             setDateAndImageView("image")
+        } else if(data === "upload"){
+            setDateAndImageView("upload")
         }
     }
 
@@ -45,6 +48,15 @@ function PlantView({session, plantID, closeButton, editButton}){
             return(<img src={tempImage}></img>)
         }
     }
+
+    const dateOrUpload = () => {
+        if(dateAndImageView === "prune" || dateAndImageView === "fertilize"){
+            return(<DateSelect plantId={plantID}  pruneOrFert={dateAndImageView} close={dateAndImage} />)
+        } else if(dateAndImageView === "upload"){
+            return(<ImageForm close={dateAndImage} imageForId={plantID} imageFor={"plant"} />)
+        }
+    }
+
     return(
         <div>
             {plantData ? 
@@ -52,9 +64,9 @@ function PlantView({session, plantID, closeButton, editButton}){
                 <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>
                 <div className='lg:grid grid-cols-4 lg:grid-cols-7 grid-flow-row gap-4'>
                         <div className='lg:col-span-7'><h1 className="text-2xl font-bold inter text-customBrown">{plantData[0].plant_name}<b className="text-customOrange">.</b><b className="text-customMidGreen text-xl font-normal">plot/{plantData[0].plant_plot}</b></h1></div>
-                        <div className='lg:col-span-4 lg:flex items-center'>
+                        <div className='lg:col-span-4 bg-white lg:flex items-center'>
                             {dateAndImageView != "image" ? 
-                                <DateSelect plantId={plantID}  pruneOrFert={dateAndImageView} close={dateAndImage} /> : imageDisplay()}
+                                dateOrUpload() : imageDisplay()}
                         </div>
                         <div className='lg:col-span-3'>
                             <div className='grid grid-cols-2 lg:grid-cols-none mt-4'>
@@ -82,7 +94,7 @@ function PlantView({session, plantID, closeButton, editButton}){
                             <div onClick={()=>setDateAndImageView("fertilize")} className='lg:w-5/12 lg:p-0 p-4 mt-1 h-12 cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
                                 <p className='text-lg font-normal text-white p-2'>Fertilize</p>
                             </div>
-                            <div className='lg:w-5/12 lg:p-0 p-4 mt-1 h-12 cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
+                            <div onClick={()=>setDateAndImageView("upload")} className='lg:w-5/12 lg:p-0 p-4 mt-1 h-12 cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
                                 <p className='text-lg font-normal text-white p-2'>Add image</p>
                             </div>
                         </div>
