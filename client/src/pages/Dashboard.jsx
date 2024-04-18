@@ -282,8 +282,8 @@ function Dashboard ({session}) {
                                         {data.note_for ? data.note_for : "Notebook"}
                                     </span>
                                 </p>
-                                <p>{formatDate(data.created_at)}</p>
-                                <p className="text-customMidGreen  mt-4">{data.note}</p>
+                                <p className="text-xs">{formatDate(data.created_at)}</p>
+                                <p className="text-black min-h-28 bg-blue-50 text-sm border border-gray-200 p-1 rounded-lg  mt-4">{data.note}</p>
                             </div>
                         );
                     })}
