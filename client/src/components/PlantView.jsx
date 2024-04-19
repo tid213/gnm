@@ -53,7 +53,7 @@ function PlantView({session, plantID, closeButton, editButton}){
         if(dateAndImageView === "prune" || dateAndImageView === "fertilize"){
             return(<DateSelect plantId={plantID}  pruneOrFert={dateAndImageView} close={dateAndImage} />)
         } else if(dateAndImageView === "upload"){
-            return(<ImageForm close={dateAndImage} imageForId={plantID} imageFor={"plant"} />)
+            return(<ImageForm closeButton={dateAndImage} imageForId={plantID} imageFor={"plant"} />)
         }
     }
 
@@ -63,8 +63,15 @@ function PlantView({session, plantID, closeButton, editButton}){
                 <div className='relative w-full inter mt-8 lg:max-w-3xl max-w-sm md:max-w-md mx-auto p-6 bg-white border border-gray-200 rounded-lg shadow-md'>
                 <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>
                 <div className='lg:grid grid-cols-4 lg:grid-cols-7 grid-flow-row gap-4'>
-                        <div className='lg:col-span-7'><h1 className="text-2xl font-bold inter text-customBrown">{plantData[0].plant_name}<b className="text-customOrange">.</b><b className="text-customMidGreen text-xl font-normal">plot/{plantData[0].plant_plot}</b></h1></div>
-                        <div className='lg:col-span-4 bg-white lg:flex items-center'>
+                        <div className='lg:col-span-7'>
+                            <h1 className="text-2xl font-bold inter text-customBrown">
+                                {plantData[0].plant_name}<b className="text-customOrange">.</b>
+                                <b className="text-customMidGreen text-xl font-normal">
+                                    plot/{plantData[0].plant_plot}
+                                </b>
+                            </h1>
+                        </div>
+                        <div className='lg:col-span-4 lg:w-96 lg:h-96 bg-white lg:flex bg-cover bg-center overflow-hidden flex justify-center items-center'>
                             {dateAndImageView != "image" ? 
                                 dateOrUpload() : imageDisplay()}
                         </div>

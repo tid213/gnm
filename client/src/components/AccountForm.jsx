@@ -104,6 +104,9 @@ const AccountForm = ({session, closeButton}) => {
         </div>
         <button className="mt-4 w-full bg-customOrange hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
         type="submit" disabled={loading}>Save</button>
+        <button className="mt-4 w-full bg-customDarkGreen hover:bg-black text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">
+            Change Password
+        </button>
       </form>
       {message && <p>{message}</p>}
     </div>

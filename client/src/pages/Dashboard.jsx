@@ -36,7 +36,7 @@ function Dashboard ({session}) {
     const [viewNoteID, setViewNoteID] = useState("");
     const [groupedPlants, setGroupedPlants] = useState({});
 
-    const colors = ["bg-lime-200", "bg-amber-200", "bg-orange-200"];
+    const colors = ["bg-lime-200","bg-lime-200", "bg-amber-200", "bg-orange-200"];
     const [colorIndices, setColorIndices] = useState([]);
 
     useEffect(()=>{
@@ -185,8 +185,10 @@ function Dashboard ({session}) {
     const editButton = (data) => {
         if(data === "plant" || data === "note" || data === "plot"){
             setFormView("edit " + data)
-        } else if(data === "close edit"){
+        } else if(data === "close edit plant"){
             setFormView("view plant")
+        } else if(data === "close edit plot"){
+            setFormView("view plot")
         }
     };
 
@@ -291,7 +293,7 @@ function Dashboard ({session}) {
         }  else if(formView === "add note"){
             return(<NoteForm session={session} closeButton={closeButton} />)
         } else if(formView === "add plot"){
-            return(<PlotForm session={session} closeButton={closeButton} />)
+            return(<PlotForm session={session} editButton={editButton} closeButton={closeButton} />)
         } else if(formView === "edit account"){
             return(<AccountForm session={session} closeButton={closeButton} />)
         } else if(formView === "edit plant"){
@@ -324,7 +326,7 @@ function Dashboard ({session}) {
                     <div className="hidden lg:flex lg:items-center lg:justify-end lg:flex-1">
                         {/* Navigation Links */}
                         <nav className="flex space-x-4">
-                        <span onClick={()=> setFormView("add note")} className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Add Note</span>
+                        <span onClick={()=> setFormView("add note")} className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Write Note</span>
                         <span onClick={()=> setFormView("add plant")} className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Add Plant</span>
                         <span onClick={()=> setFormView("add plot")} className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Add Plot</span>
                         <span onClick={()=> setFormView("edit account")} className="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Account</span>

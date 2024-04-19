@@ -85,7 +85,7 @@ const NoteForm = ({session, closeButton}) => {
   return (
     <div className='relative inter w-full mt-12 max-w-md lg:w-96 mx-auto p-6 bg-white rounded-lg shadow-md'>
         <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>
-        <h2 className='text-2xl font-semibold mb-4'>Write a Note</h2>
+        <h2 className='text-2xl font-normal mb-4'>write<b className="text-customOrange">.</b><b className='font-semibold'>Note</b></h2>
         <form onSubmit={handleSubmit}>
       <div className='mb-4'>
         <label className='block text-gray-700'>Note Type:</label>
