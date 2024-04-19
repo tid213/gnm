@@ -124,13 +124,13 @@ function Home () {
             </section>
             <section className="container  mx-auto py-8 mt-12">
                 <div className="flex justify-center"><div className="text-center"><h1 className="text-5xl text-customDarkGreen inter font-bold mb-4 lg:mb-8 text-center">benefits<b className="text-customOrange">.</b></h1></div></div>
-                <div className="px-4 lg:grid lg:grid-cols-2 gap-4 lg:mx-12">
+                <div className="px-4 flex flex-col lg:flex-none lg:grid lg:grid-cols-2 gap-4 lg:mx-12">
                     <div className="bg-customMidGreen mt-4 p-4 flex lg:flex-row flex-col items-center flex-col-reverse rounded-lg shadow-md">
                         <p className="text-lg inter lg:mt-0 mt-4 text-white px-4 font-normal">
                         Keeping notes for plant care can be highly beneficial as it allows gardeners to track their plant's progress, understand their unique needs, and make informed decisions for optimal growth. Research has shown that keeping detailed records of plant care activities can lead to healthier and more productive plants.
                         </p>
                     </div>
-                    <div className=" row-span-2">
+                    <div className="lg:order-none order-3 row-span-2">
                         <img className="mb-4 lg:mt-4 lg:mb-0  max-w-sm mx-auto lg:max-w-md" src={wateringPlantImg} alt="Person watering a plant" />
                     </div>
                     <div className="bg-customMidGreen mt-4 p-4 flex flex-col items-center rounded-lg shadow-md">
