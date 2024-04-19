@@ -62,7 +62,7 @@ function Dashboard ({session}) {
 
     useEffect(() => {
         generateRandomColorIndices();
-    }, [toggle]);
+    }, [noteData, plantData, plotData, toggle]);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -91,7 +91,7 @@ function Dashboard ({session}) {
                 setTimeout(function(){
                     setFullyRegistered(true)
                     setRegCheck(false)
-                }, 2000)
+                }, 1000)
                 
             }
 
@@ -167,7 +167,7 @@ function Dashboard ({session}) {
         if(toggle === "notes"){
             const randomIndices = Array.from({ length: noteData.length }, () => Math.floor(Math.random() * colors.length));
             setColorIndices(randomIndices);
-        } else if(toggle === "plants"){
+        } else if(toggle === "plants" && plantData){
             const randomIndices = Array.from({ length: plantData.length }, () => Math.floor(Math.random() * colors.length));
             setColorIndices(randomIndices);
         } else if(toggle === "plots"){
@@ -235,7 +235,7 @@ function Dashboard ({session}) {
                                     <img className="w-full h-full object-cover overflow-hidden" src={data.plant_image} /> : 
                                     <img className='w-full h-full object-cover overflow-hidden' src={tempImage}></img>}
                                     </div>
-                                    <p className="text-customMidGreen font-medium text-xl mt-4">{data.plant_name}</p>
+                                    <p className="text-black font-medium text-xl mt-4">{data.plant_name}</p>
                                 </div>
                             )
                         })}
@@ -254,7 +254,7 @@ function Dashboard ({session}) {
                                     <img className="w-full h-full object-cover overflow-hidden" src={data.plot_image} /> : 
                                     <img className='w-full h-full object-cover overflow-hidden' src={tempPlotImage}></img>}
                                     </div>
-                                    <p className="text-customMidGreen font-medium text-xl mt-4">{data.name}</p>
+                                    <p className="text-black font-medium text-xl mt-4">{data.name}</p>
                                 </div>
                             )
                         })}
@@ -269,11 +269,11 @@ function Dashboard ({session}) {
                                 onClick={() => setNoteID(data.id)}
                                 className={`lg:h-52 lg:w-52 min-h-40 w-38 inter p-4 rounded-lg shadow-md cursor-pointer ${colors[colorIndices[index]]}`}>
                                  <p className="text-black min-h-28 text-sm p-1 rounded-lg  mt-4">{data.note}</p>
-                                <p className="text-customDarkGreen ">
+                                <p className="text-black ">
                                     {data.note_type}
                                     <b className="text-customOrange">.</b>
-                                    <span className="text-customMidGreen font-medium text-lg ">
-                                        {data.note_for ? data.note_for : "Notebook"}
+                                    <span className="text-black font-medium text-lg ">
+                                        {data.note_for ? data.note_for : "Note"}
                                     </span>
                                 </p>
                                 <p className="text-xs">{formatDate(data.created_at)}</p>
