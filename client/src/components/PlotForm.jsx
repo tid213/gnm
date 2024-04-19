@@ -74,8 +74,8 @@ const PlotForm = ({ plotId, session, closeButton, editButton }) => {
     <div className='relative inter w-full mt-12 max-w-sm lg:w-96 mx-auto p-6 bg-white rounded-lg shadow-md'>
       {plotId ? <div onClick={()=> editButton("close edit plot")} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div> : 
                 <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>}
-      {plotId ? <h2 className='font-normal text-2xl mb-4'>edit<b className="text-customOrange">.</b><b className='font-semibold text-2xl'>{name}</b></h2> : 
-                <h2 className='text-2xl font-normal mb-4'>add<b className="text-customOrange">.</b><b className='text-2xl font-semibold'>Plot</b></h2>}
+      {plotId ? <h2 className='font-normal text-2xl mb-4'>edit <b className='font-semibold text-2xl'>plot</b><b className="text-customOrange">.</b></h2> : 
+                <h2 className='text-2xl font-normal mb-4'>add <b className='text-2xl font-semibold'>plot</b><b className="text-customOrange">.</b></h2>}
       <form onSubmit={handleSubmit}>
         <div className='mb-4'>
           <label className='block text-gray-700'>Name:</label>

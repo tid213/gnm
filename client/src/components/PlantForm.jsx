@@ -83,8 +83,8 @@ const PlantForm = ({ plantId, session, closeButton, editButton }) => {
     <div className='relative w-full inter mt-12 max-w-sm md:max-w-md mx-auto p-6 bg-white rounded-lg shadow-md'>
      {plantId ? <div onClick={()=> editButton("close edit plant")} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div> :
                 <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>}
-     {plantId ? <h2 className='text-2xl font-normal mb-4'>edit<b className="text-customOrange">.</b><b className='text-2xl font-semibold'>{plantName}</b></h2>:
-                <h2 className='text-2xl font-normal mb-4'>add<b className="text-customOrange">.</b><b className='text-2xl font-semibold'>Plant</b></h2>}
+     {plantId ? <h2 className='text-2xl font-normal mb-4'>edit <b className='text-2xl font-semibold'>plant</b><b className="text-customOrange">.</b></h2>:
+                <h2 className='text-2xl font-normal mb-4'>add <b className='text-2xl font-semibold'>plant</b><b className="text-customOrange">.</b></h2>}
      <form onSubmit={handleSubmit} className='lg:grid lg:grid-cols-2 lg:gap-4'>
       <div className='mt-4 lg:mt-0 lg:col-span-2'>
         <label className="block text-gray-700">Plant Name:</label>

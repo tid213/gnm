@@ -72,7 +72,9 @@ const AccountForm = ({session, closeButton}) => {
   return (
     <div className="inter relative mt-12 max-w-sm lg:w-96 mx-auto p-6 bg-white rounded-lg shadow-md">
       <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>
-      <h2 className="text-3xl font-semibold mb-4 text-customMidGreen">Account Info</h2>
+      {username ? <h2 className="text-2xl font-normal mb-4 text-customMidGreen">account <b className='text-2xl font-semibold mb-4 text-black'>edit</b><b className="text-customOrange">.</b></h2>: 
+                    <h2 className="text-3xl font-semibold mb-4 text-customMidGreen">complete<b className="text-customOrange">.</b>Account</h2>}
+      
       <form onSubmit={handleSubmit} >
         <div className='mb-4'>
           <label className='block text-gray-700'>Username:</label>
