@@ -36,12 +36,14 @@ function Dashboard ({session}) {
     const [viewNoteID, setViewNoteID] = useState("");
     const [groupedPlants, setGroupedPlants] = useState({});
 
+    const colors = ["bg-lime-200", "bg-amber-200", "bg-orange-200"];
+    const [colorIndices, setColorIndices] = useState([]);
+
     useEffect(()=>{
         fetchUserInfo();
         fetchPlantData();
         fetchPlotData();
         fetchNoteData();
-        groupPlants();
         const handleScroll = () => {
             const scrollPosition = window.scrollY;
             if (scrollPosition > 0) {
@@ -57,6 +59,10 @@ function Dashboard ({session}) {
             window.removeEventListener('scroll', handleScroll);
           };
     }, [])
+
+    useEffect(() => {
+        generateRandomColorIndices();
+    }, [toggle]);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -117,32 +123,6 @@ function Dashboard ({session}) {
           }
     };
 
-    const groupPlants = () => {
-        const makeGroups = {};
-            if(plantData){
-                plantData.forEach(data => {
-                    const plot = data.plant_plot;
-                    if (!makeGroups[plot]) {
-                        makeGroups[plot] = [];
-                    }
-                    makeGroups[plot].push(data);
-                });
-                setGroupedPlants(makeGroups)
-            }
-    }
-
-    const groupPlantsByPlot = (plantData) => {
-        const groupedPlants = {};
-        plantData.forEach(data => {
-            const plot = data.plant_plot;
-            if (!groupedPlants[plot]) {
-                groupedPlants[plot] = [];
-            }
-            groupedPlants[plot].push(data);
-        });
-        return groupedPlants;
-    };
-
     const fetchPlotData = async () => {
         try {
             setLoadingPlotData(true);
@@ -181,6 +161,19 @@ function Dashboard ({session}) {
             console.error('Error fetching plants:', error.message);
             setLoadingNoteData(false);
           }
+    };
+
+    const generateRandomColorIndices = () => {
+        if(toggle === "notes"){
+            const randomIndices = Array.from({ length: noteData.length }, () => Math.floor(Math.random() * colors.length));
+            setColorIndices(randomIndices);
+        } else if(toggle === "plants"){
+            const randomIndices = Array.from({ length: plantData.length }, () => Math.floor(Math.random() * colors.length));
+            setColorIndices(randomIndices);
+        } else if(toggle === "plots"){
+            const randomIndices = Array.from({ length: plotData.length }, () => Math.floor(Math.random() * colors.length));
+            setColorIndices(randomIndices);
+        }
     };
 
     const closeButton = (data) => {
@@ -232,11 +225,11 @@ function Dashboard ({session}) {
         if(toggle === "plants"){
             return(
                 <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-8 gap-4 ml-4 mr-4">
-                    {plantData.slice().reverse().map(function(data) {
+                    {plantData.slice().reverse().map(function(data, index) {
                             return(
                                 <div key={data.id} 
                                 onClick={()=>setPlantID(data.id)}
-                                className="bg-white inter p-4 rounded-lg shadow-md cursor-pointer">
+                                className={`p-4 rounded-lg shadow-md cursor-pointer ${colors[colorIndices[index]]}`}>
                                     <div className='lg:h-52 lg:w-52 h-40 w-38 bg-cover bg-center overflow-hidden flex items-center'>
                                     {data.plant_image ? 
                                     <img className="w-full h-full object-cover overflow-hidden" src={data.plant_image} /> : 
@@ -251,11 +244,11 @@ function Dashboard ({session}) {
         } else if(toggle === "plots"){
             return(
                 <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-8 gap-4 ml-4 mr-4">
-                    {plotData.slice().reverse().map(function(data) {
+                    {plotData.slice().reverse().map(function(data, index) {
                             return(
                                 <div key={data.id} 
                                 onClick={()=>setPlotID(data.id)}
-                                className="bg-white inter p-4 rounded-lg shadow-md cursor-pointer">
+                                className={`p-4 rounded-lg shadow-md cursor-pointer ${colors[colorIndices[index]]}`}>
                                     <div className='lg:h-52 lg:w-52 h-40 w-38 bg-cover bg-center overflow-hidden flex items-center'>
                                     {data.plot_image ? 
                                     <img className="w-full h-full object-cover overflow-hidden" src={data.plot_image} /> : 
@@ -270,11 +263,12 @@ function Dashboard ({session}) {
         } else if(toggle === "notes"){
             return(
                 <div className="grid lg:grid-cols-5 grid-cols-2 lg:gap-4 gap-4 ml-4 mr-4">
-                    {noteData.slice().reverse().map(function(data) {
+                    {noteData.slice().reverse().map(function(data, index) {
                         return (
                             <div key={data.id} 
                                 onClick={() => setNoteID(data.id)}
-                                className="lg:h-52 lg:w-52 min-h-40 w-38 bg-white inter p-4 rounded-lg shadow-md cursor-pointer">
+                                className={`lg:h-52 lg:w-52 min-h-40 w-38 inter p-4 rounded-lg shadow-md cursor-pointer ${colors[colorIndices[index]]}`}>
+                                 <p className="text-black min-h-28 text-sm p-1 rounded-lg  mt-4">{data.note}</p>
                                 <p className="text-customDarkGreen ">
                                     {data.note_type}
                                     <b className="text-customOrange">.</b>
@@ -283,7 +277,6 @@ function Dashboard ({session}) {
                                     </span>
                                 </p>
                                 <p className="text-xs">{formatDate(data.created_at)}</p>
-                                <p className="text-black min-h-28 bg-blue-50 text-sm border border-gray-200 p-1 rounded-lg  mt-4">{data.note}</p>
                             </div>
                         );
                     })}
