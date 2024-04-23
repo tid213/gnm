@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
-import { redirect } from "react-router-dom";
+import closeSquare from '../images/close-square.svg';
 
 const PlantForm = ({ plantId, session, closeButton, editButton }) => {
   const [plantName, setPlantName] = useState('');
@@ -80,22 +80,22 @@ const PlantForm = ({ plantId, session, closeButton, editButton }) => {
   };
 
   return (
-    <div className='relative w-full inter mt-12 max-w-sm md:max-w-md mx-auto p-6 bg-white rounded-lg shadow-md'>
-     {plantId ? <div onClick={()=> editButton("close edit plant")} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div> :
-                <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>}
-     {plantId ? <h2 className='text-2xl font-normal mb-4'>edit <b className='text-2xl font-semibold'>plant</b><b className="text-customOrange">.</b></h2>:
-                <h2 className='text-2xl font-normal mb-4'>add <b className='text-2xl font-semibold'>plant</b><b className="text-customOrange">.</b></h2>}
+    <div className='relative w-full inter mt-12 max-w-sm md:max-w-md mx-auto p-6 bg-white rounded-lg shadow-md border border-gray-200'>
+     {plantId ? <div onClick={()=> editButton("close edit plant")} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><img src={closeSquare} className='h-8 w-8 '></img></div> :
+                <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><img src={closeSquare} className='h-8 w-8 '></img></div>}
+     {plantId ? <h2 className='text-2xl font-normal mb-4 text-customMidGreen'>Edit Plant</h2>:
+                <h2 className='text-2xl font-normal mb-4 text-customMidGreen'>Add Plant</h2>}
      <form onSubmit={handleSubmit} className='lg:grid lg:grid-cols-2 lg:gap-4'>
       <div className='mt-4 lg:mt-0 lg:col-span-2'>
         <label className="block text-gray-700">Plant Name:</label>
         <input type="text" value={plantName} 
-        className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
+        className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
         onChange={(e) => setPlantName(e.target.value)} required />
       </div>
       <div className='mt-4 lg:mt-0 lg:col-span-2'>
         <label className="block text-gray-700">Sun Type:</label>
         <select value={sunType} 
-        className='w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500'
+        className='w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500'
         onChange={(e) => setSunType(e.target.value)}>
           <option value="Full Sun">Full Sun</option>
           <option value="Part Sun">Part Sun</option>
@@ -108,7 +108,7 @@ const PlantForm = ({ plantId, session, closeButton, editButton }) => {
         <select
             value={waterFreq}
             onChange={(e) => setWaterFreq(e.target.value)}
-            className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
+            className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
             required
         >
             {waterFreq ? <option value={waterFreq}>{waterFreq}</option> : ""}
@@ -122,7 +122,7 @@ const PlantForm = ({ plantId, session, closeButton, editButton }) => {
       <div className='mt-4 lg:mt-0'>
         <label className='block text-gray-700'>Plant Plot:</label>
         <select value={plantPlot} 
-        className='w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500'
+        className='w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500'
         onChange={(e) => setPlantPlot(e.target.value)} required>
           <option value="">Select Plot</option>
           {plots.map((plot) => (
@@ -133,7 +133,7 @@ const PlantForm = ({ plantId, session, closeButton, editButton }) => {
       <div className='mt-4 lg:mt-0'>
         <label className='block text-gray-700'>Fertilizing Frequency:</label>
         <select value={fertFreq} 
-        className='w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500'
+        className='w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500'
         onChange={(e) => setFertFreq(e.target.value)}>
           <option value="Two weeks">Two weeks</option>
           <option value="One Month">One Month</option>
@@ -146,7 +146,7 @@ const PlantForm = ({ plantId, session, closeButton, editButton }) => {
       <div className='mt-4 lg:mt-0'>
         <label className='block text-gray-700'>Pruning Frequency:</label>
         <select value={pruneFreq} 
-        className='w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500'
+        className='w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500'
         onChange={(e) => setPruneFreq(e.target.value)}>
           <option value="Monthly">Monthly</option>
           <option value="Two Months">Two Months</option>

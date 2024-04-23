@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
+import closeSquare from '../images/close-square.svg';
 
 const AccountForm = ({session, closeButton}) => {
   const [username, setUsername] = useState('');
@@ -70,17 +71,15 @@ const AccountForm = ({session, closeButton}) => {
   };
 
   return (
-    <div className="inter relative mt-12 max-w-sm lg:w-96 mx-auto p-6 bg-white rounded-lg shadow-md">
-      <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>
-      {username ? <h2 className="text-2xl font-normal mb-4 text-customMidGreen">account <b className='text-2xl font-semibold mb-4 text-black'>edit</b><b className="text-customOrange">.</b></h2>: 
-                    <h2 className="text-3xl font-semibold mb-4 text-customMidGreen">complete<b className="text-customOrange">.</b>Account</h2>}
-      
+    <div className="inter relative mt-12 max-w-sm lg:w-96 mx-auto p-6 bg-white rounded-lg shadow-md border border-gray-200">
+      <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><img src={closeSquare} className='h-8 w-8 '></img></div>
+      <h2 className="text-2xl font-normal mb-4 text-customMidGreen">Account</h2>
       <form onSubmit={handleSubmit} >
         <div className='mb-4'>
           <label className='block text-gray-700'>Username:</label>
           <input
             type="text"
-            className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
+            className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
@@ -90,7 +89,7 @@ const AccountForm = ({session, closeButton}) => {
           <label className='block text-gray-700'>Grow Zone:</label>
           <input
             type="text"
-            className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
+            className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
             value={zone}
             onChange={(e) => setZone(e.target.value)}
           />
@@ -99,7 +98,7 @@ const AccountForm = ({session, closeButton}) => {
           <label className='block text-gray-700'>Zip Code:</label>
           <input
             type="text"
-            className="w-full px-4 py-2 border rounded-md bg-lime-200 focus:outline-none focus:border-lime-500"
+            className="w-full px-4 py-2 border rounded-md bg-lime-100 focus:outline-none focus:border-lime-500"
             value={zipCode}
             onChange={(e) => setZipCode(e.target.value)}
           />
