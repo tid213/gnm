@@ -3,6 +3,10 @@ import { supabase } from '../supabaseClient';
 import tempImage from '../images/temp-image.png';
 import DateSelect from './DateSelect';
 import ImageForm from './ImageForm';
+import editImage from '../images/edit.svg'
+import shearsImage from '../images/shears.png';
+import fertilizerImage from '../images/fertilizer.png';
+import AddImageIcon from '../images/add-image.png';
 
 function PlantView({session, plantID, closeButton, editButton}){
 
@@ -60,9 +64,9 @@ function PlantView({session, plantID, closeButton, editButton}){
     return(
         <div>
             {plantData ? 
-                <div className='relative w-full inter mt-8 lg:max-w-3xl max-w-sm md:max-w-md mx-auto p-6 bg-white border border-gray-200 rounded-lg shadow-md'>
+                <div className='relative w-full inter mt-8 lg:mt-8 lg:max-w-3xl max-w-sm md:max-w-md mx-auto p-6 bg-white border border-gray-200 rounded-lg shadow-md'>
                 <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>
-                <div className='lg:grid grid-cols-4 lg:grid-cols-7 grid-flow-row gap-4'>
+                <div className='lg:grid grid-cols-4 lg:grid-cols-9 grid-flow-row gap-4'>
                         <div className='lg:col-span-7'>
                             <h1 className="text-2xl font-bold inter text-customBrown">
                                 {plantData[0].plant_name}<b className="text-customOrange">.</b>
@@ -78,7 +82,6 @@ function PlantView({session, plantID, closeButton, editButton}){
                         <div className='lg:col-span-3'>
                             <div className='grid grid-cols-2 lg:grid-cols-none mt-4'>
                                 <div>
-                                <p className='font-bold lg:block hidden'>Plot location:</p><p className='lg:mb-4 mb-2 hidden lg:block'>{plantData[0].plant_plot}</p>
                                     <p className='font-bold'>Water frequency:</p><p className='lg:mb-4 mb-2'>{plantData[0].water_freq}</p>
                                     <p className='font-bold'>Last fertilized:</p><p className='lg:mb-4 mb-2'>{plantData[0].fertilize_date ? plantData[0].fertilize_date : "Edit plant to add" }</p>
                                     <p className='font-bold'>Last pruned:</p><p className='lg:mb-4 mb-2'>{plantData[0].prune_date ? plantData[0].prune_date : "Edit plant to add" }</p>
@@ -90,19 +93,26 @@ function PlantView({session, plantID, closeButton, editButton}){
                                 </div>
                             </div>
                         </div>
-                        <div className='lg:col-span-7  lg:flex-nowrap flex-wrap lg:flex gap-4'>
+                        <div className='lg:col-span-2 h-fit flex justify-center lg:justify-start lg:flex-nowrap flex-wrap lg:flex lg:flex-col gap-4 lg:border-l-2 lg:border-gray-100'>
                             <div onClick={()=>editButton("plant")}
-                                className='lg:w-5/12 lg:mt-1 lg:p-0 p-4 mt-1 h-12 w-auto cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
-                                <p className='text-lg font-normal text-white p-2'>Edit</p>
+                                className='lg:w-fit w-full m-auto lg:mt-1 lg:p-0 p-1 mt-1  w-auto cursor-pointer flex justify-center items-center border lg:border-0 hover:border-b-2 lg:shadow-none shadow-md'>
+                                <img src={editImage} className='w-4 h-4'></img>
+                                <p className='text-normal font-normal text-black p-2'>Edit</p>
                             </div>
-                            <div onClick={()=>setDateAndImageView("prune")} className='lg:w-5/12 lg:p-0 p-4 mt-1 h-12 cursor-pointer flex bg-customMidGreen border-2 border-customLightGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
-                                <p className='text-lg font-normal text-white p-2'>Prune</p>
+                            <div onClick={()=>setDateAndImageView("prune")} 
+                                className='lg:w-fit w-full m-auto lg:p-0 p-1 mt-1  cursor-pointer flex justify-center items-center border lg:border-0 hover:border-b-2 lg:shadow-none shadow-md'>
+                                <img src={shearsImage} className='w-4 h-4'></img>
+                                <p className='text-normal font-normal text-black p-2'>Prune</p>
                             </div>
-                            <div onClick={()=>setDateAndImageView("fertilize")} className='lg:w-5/12 lg:p-0 p-4 mt-1 h-12 cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
-                                <p className='text-lg font-normal text-white p-2'>Fertilize</p>
+                            <div onClick={()=>setDateAndImageView("fertilize")}
+                                className='lg:w-fit w-full m-auto lg:p-0 p-1 mt-1 cursor-pointer flex justify-center items-center border lg:border-0 hover:border-b-2 lg:shadow-none shadow-md'>
+                                <img src={fertilizerImage} className='w-4 h-4'></img>
+                                <p className='text-normal font-normal text-black p-2'>Fertilize</p>
                             </div>
-                            <div onClick={()=>setDateAndImageView("upload")} className='lg:w-5/12 lg:p-0 p-4 mt-1 h-12 cursor-pointer flex bg-customMidGreen hover:bg-customDarkGreen rounded-lg justify-center items-center'>
-                                <p className='text-lg font-normal text-white p-2'>Add image</p>
+                            <div onClick={()=>setDateAndImageView("upload")} 
+                                className='lg:w-fit w-full m-auto lg:p-0 p-1 mt-1 cursor-pointer flex justify-center items-center border lg:border-0 hover:border-b-2 lg:shadow-none shadow-md'>
+                                <img src={AddImageIcon} className='w-4 h-4'></img>
+                                <p className='text-normal font-normal text-black p-2'>Image</p>
                             </div>
                         </div>
                 </div>
