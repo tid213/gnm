@@ -34,10 +34,9 @@ function Dashboard ({session}) {
     const [viewPlantID, setViewPlantID] = useState("");
     const [viewPlotID, setViewPlotID] = useState("");
     const [viewNoteID, setViewNoteID] = useState("");
-    const [groupedPlants, setGroupedPlants] = useState({});
-
     const colors = ["bg-lime-200","bg-lime-200", "bg-amber-200", "bg-orange-200"];
     const [colorIndices, setColorIndices] = useState([]);
+    const [selectedColor, setSelectedColor] = useState();
 
     useEffect(()=>{
         fetchUserInfo();
@@ -230,7 +229,7 @@ function Dashboard ({session}) {
                     {plantData.slice().reverse().map(function(data, index) {
                             return(
                                 <div key={data.id} 
-                                onClick={()=>setPlantID(data.id)}
+                                onClick={()=>{setPlantID(data.id);setSelectedColor(colors[colorIndices[index]])}}
                                 className={`p-4 rounded-lg shadow-md cursor-pointer ${colors[colorIndices[index]]}`}>
                                     <div className='lg:h-52 lg:w-52 h-40 w-38 bg-cover bg-center overflow-hidden flex items-center'>
                                     {data.plant_image ? 
@@ -238,6 +237,7 @@ function Dashboard ({session}) {
                                     <img className='w-full h-full object-cover overflow-hidden' src={tempImage}></img>}
                                     </div>
                                     <p className="text-black font-medium text-xl mt-4">{data.plant_name}</p>
+                                    <p>{colors[colorIndices[index]]}</p>
                                 </div>
                             )
                         })}
@@ -249,7 +249,7 @@ function Dashboard ({session}) {
                     {plotData.slice().reverse().map(function(data, index) {
                             return(
                                 <div key={data.id} 
-                                onClick={()=>setPlotID(data.id)}
+                                onClick={()=>{setPlotID(data.id);setSelectedColor(colors[colorIndices[index]])}}
                                 className={`p-4 rounded-lg shadow-md cursor-pointer ${colors[colorIndices[index]]}`}>
                                     <div className='lg:h-52 lg:w-52 h-40 w-38 bg-cover bg-center overflow-hidden flex items-center'>
                                     {data.plot_image ? 
@@ -301,7 +301,7 @@ function Dashboard ({session}) {
         } else if(formView === "edit plot"){
             return(<PlotForm session={session} editButton={editButton} closeButton={closeButton} plotId={viewPlotID} />)
         } else if(formView === "view plant"){
-            return(<PlantView key={viewPlantID} session={session} plantID={viewPlantID} editButton={editButton} closeButton={closeButton} />)
+            return(<PlantView key={viewPlantID} bgColor={selectedColor} session={session} plantID={viewPlantID} editButton={editButton} closeButton={closeButton} />)
         } else if(formView === "view plot"){
             return(<PlotView key={viewPlotID} session={session} plotID={viewPlotID} editButton={editButton} closeButton={closeButton} />)
         }
