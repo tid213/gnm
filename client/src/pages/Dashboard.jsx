@@ -229,15 +229,14 @@ function Dashboard ({session}) {
                     {plantData.slice().reverse().map(function(data, index) {
                             return(
                                 <div key={data.id} 
-                                onClick={()=>{setPlantID(data.id);setSelectedColor(colors[colorIndices[index]])}}
-                                className={`p-4 rounded-lg shadow-md cursor-pointer ${colors[colorIndices[index]]}`}>
+                                onClick={()=>{setPlantID(data.id)}}
+                                className={`p-4 rounded-sm shadow-md cursor-pointer ${colors[colorIndices[index]]}`}>
                                     <div className='lg:h-52 lg:w-52 h-40 w-38 bg-cover bg-center overflow-hidden flex items-center'>
                                     {data.plant_image ? 
                                     <img className="w-full h-full object-cover overflow-hidden" src={data.plant_image} /> : 
                                     <img className='w-full h-full object-cover overflow-hidden' src={tempImage}></img>}
                                     </div>
                                     <p className="text-black font-medium text-xl mt-4">{data.plant_name}</p>
-                                    <p>{colors[colorIndices[index]]}</p>
                                 </div>
                             )
                         })}
@@ -249,7 +248,7 @@ function Dashboard ({session}) {
                     {plotData.slice().reverse().map(function(data, index) {
                             return(
                                 <div key={data.id} 
-                                onClick={()=>{setPlotID(data.id);setSelectedColor(colors[colorIndices[index]])}}
+                                onClick={()=>{setPlotID(data.id);}}
                                 className={`p-4 rounded-lg shadow-md cursor-pointer ${colors[colorIndices[index]]}`}>
                                     <div className='lg:h-52 lg:w-52 h-40 w-38 bg-cover bg-center overflow-hidden flex items-center'>
                                     {data.plot_image ? 
