@@ -72,7 +72,7 @@ function PlotView({plotID, session, closeButton, editButton}){
     return(
         <div>
             {plotData ? 
-                <div className='relative w-full inter mt-8 lg:max-w-4xl max-w-sm md:max-w-md mx-auto p-6 bg-white border border-gray-200 rounded-lg shadow-md'>
+                <div className='relative w-full inter mt-8 lg:max-w-4xl max-w-sm md:max-w-md mx-auto p-6 bg-lime-50 border border-gray-200 rounded-lg shadow-md'>
                     <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>
                     <div className='lg:grid grid-cols-4 lg:grid-cols-9 grid-flow-row gap-4'>
                         <div className='lg:col-span-9'>
@@ -111,16 +111,16 @@ function PlotView({plotID, session, closeButton, editButton}){
                         </div>
                         <div className='lg:col-span-2 lg:flex lg:justify-start h-fit lg:items-center lg:flex-nowrap lg:flex-col  gap-4 lg:border-l-2 lg:border-gray-100'>
                             <div onClick={()=>editButton("plot")}
-                                className='lg:w-5/12 lg:mt-1 lg:p-0 p-4 mt-1 h-12 w-auto cursor-pointer flex rounded-lg justify-center items-center lg:border-0 hover:border-b-2 lg:shadow-none shadow-md'>
+                                className='lg:w-5/12 lg:mt-1 lg:p-0 p-4 mt-1 h-12 w-auto cursor-pointer flex justify-center items-center lg:border-0 hover:border-b-2 lg:shadow-none shadow-md'>
                                 <img src={editImage} className='w-4 h-4'></img>
                                 <p className='text-normal font-normal text-black p-2'>Edit</p>
                             </div>
                             <div onClick={()=>setImageView("upload")}
-                                className='lg:w-5/12 lg:mt-1 lg:p-0 p-4 mt-1 h-12 w-auto cursor-pointer flex rounded-lg justify-center items-center lg:border-0 hover:border-b-2 lg:shadow-none shadow-md'>
+                                className='lg:w-5/12 lg:mt-1 lg:p-0 p-4 mt-1 h-12 w-auto cursor-pointer flex justify-center items-center lg:border-0 hover:border-b-2 lg:shadow-none shadow-md'>
                                 <img src={AddImageIcon} className='w-4 h-4'></img>
                                 <p className='text-normal font-normal text-black p-2'>Image</p>
                             </div>
-                            <div className='lg:w-5/12 lg:p-0 p-4 mt-1 h-12 cursor-pointer flex rounded-lg justify-center items-center lg:border-0 hover:border-b-2 lg:shadow-none shadow-md'>
+                            <div className='lg:w-5/12 lg:p-0 p-4 mt-1 h-12 cursor-pointer flex justify-center items-center lg:border-0 hover:border-b-2 lg:shadow-none shadow-md'>
                                 <p className='text-normal font-normal text-black p-2'>Delete</p>
                             </div>
                         </div>

@@ -249,7 +249,7 @@ function Dashboard ({session}) {
                             return(
                                 <div key={data.id} 
                                 onClick={()=>{setPlotID(data.id);}}
-                                className={`p-4 rounded-lg shadow-md cursor-pointer ${colors[colorIndices[index]]}`}>
+                                className={`p-4 rounded-sm shadow-md cursor-pointer ${colors[colorIndices[index]]}`}>
                                     <div className='lg:h-52 lg:w-52 h-40 w-38 bg-cover bg-center overflow-hidden flex items-center'>
                                     {data.plot_image ? 
                                     <img className="w-full h-full object-cover overflow-hidden" src={data.plot_image} /> : 
@@ -268,7 +268,7 @@ function Dashboard ({session}) {
                         return (
                             <div key={data.id} 
                                 onClick={() => setNoteID(data.id)}
-                                className={`lg:h-52 lg:w-52 min-h-40 w-38 inter p-4 rounded-lg shadow-md cursor-pointer ${colors[colorIndices[index]]}`}>
+                                className={`lg:h-52 lg:w-52 min-h-40 w-38 inter p-4 rounded-sm shadow-md cursor-pointer ${colors[colorIndices[index]]}`}>
                                  <p className="text-black min-h-28 text-sm p-1 rounded-lg  mt-4">{data.note}</p>
                                 <p className="text-black ">
                                     {data.note_type}
