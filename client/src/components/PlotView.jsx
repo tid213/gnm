@@ -4,7 +4,7 @@ import tempImage from '../images/garden-plot.png';
 import ImageForm from './ImageForm';
 import editImage from '../images/edit.svg'
 import AddImageIcon from '../images/add-image.png';
-import closeSquare from '../images/close-square.svg';
+import closeImage from '../images/x.svg';
 
 function PlotView({plotID, session, closeButton, editButton}){
 
@@ -73,7 +73,7 @@ function PlotView({plotID, session, closeButton, editButton}){
         <div>
             {plotData ? 
                 <div className='relative w-full inter mt-8 lg:max-w-4xl max-w-sm md:max-w-md mx-auto p-6 bg-lime-50 border border-gray-200 rounded-lg shadow-md'>
-                    <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><a>X</a></div>
+                    <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><img src={closeImage} className='w-4 h-4'></img></div>
                     <div className='lg:grid grid-cols-4 lg:grid-cols-9 grid-flow-row gap-4'>
                         <div className='lg:col-span-9'>
                             <h1 className="text-2xl font-normal inter text-customBrown">

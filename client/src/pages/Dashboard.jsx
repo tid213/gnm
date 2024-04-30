@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import PlantView from "../components/PlantView";
 import ViewToggle from "../components/ViewToggle";
 import PlotView from "../components/PlotView";
+import NoteView from "../components/NoteView";
 
 function Dashboard ({session}) {
 
@@ -271,11 +272,8 @@ function Dashboard ({session}) {
                                 className={`lg:h-52 lg:w-52 min-h-40 w-38 inter p-4 rounded-sm shadow-md cursor-pointer ${colors[colorIndices[index]]}`}>
                                  <p className="text-black min-h-28 text-sm p-1 rounded-lg  mt-4">{data.note}</p>
                                 <p className="text-black ">
-                                    {data.note_type}
-                                    <b className="text-customOrange">.</b>
-                                    <span className="text-black font-medium text-lg ">
-                                        {data.note_for ? data.note_for : "Note"}
-                                    </span>
+                                    {data.note_type === "Garden" ? data.note_type : data.note_for}
+                                    <span> Note</span>
                                 </p>
                                 <p className="text-xs">{formatDate(data.created_at)}</p>
                             </div>
@@ -303,6 +301,8 @@ function Dashboard ({session}) {
             return(<PlantView key={viewPlantID} bgColor={selectedColor} session={session} plantID={viewPlantID} editButton={editButton} closeButton={closeButton} />)
         } else if(formView === "view plot"){
             return(<PlotView key={viewPlotID} session={session} plotID={viewPlotID} editButton={editButton} closeButton={closeButton} />)
+        } else if(formView === "view note"){
+            return(<NoteView noteID={viewNoteID} closeButton={closeButton} editButton={editButton} />)
         }
     }
 
@@ -314,7 +314,7 @@ function Dashboard ({session}) {
         )
     } else{
         return(
-            <div className="min-h-screen flex flex-col items-center bg-neutral-100">
+            <div className="min-h-screen flex flex-col items-center bg-customLightBrown">
                 <header className={`fixed top-0 w-full ${isTransparent ? 'bg-white' : 'bg-opacity-90 bg-white'}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">

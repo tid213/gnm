@@ -8,6 +8,7 @@ import shearsImage from '../images/shears.png';
 import fertilizerImage from '../images/fertilizer.png';
 import AddImageIcon from '../images/add-image.png';
 import closeSquare from '../images/close-square.svg';
+import closeImage from '../images/x.svg';
 
 function PlantView({session, plantID, closeButton, editButton, bgColor}){
 
@@ -65,8 +66,8 @@ function PlantView({session, plantID, closeButton, editButton, bgColor}){
     return(
         <div>
             {plantData ? 
-                <div className={`relative w-full inter mt-8 lg:mt-8 lg:max-w-4xl max-w-sm md:max-w-md mx-auto p-6 border border-gray-200 rounded-lg shadow-md bg-lime-50`}>
-                <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><img src={closeSquare} className='h-8 w-8 '></img></div>
+                <div className={`relative w-full inter mt-8 lg:mt-8 lg:max-w-4xl max-w-sm md:max-w-md mx-auto p-6 border border-gray-200 rounded-lg shadow-md bg-white`}>
+                <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-4 top-2 cursor-pointer'><img src={closeImage} className='h-4 w-4 '></img></div>
                 <div className='lg:grid grid-cols-4 lg:grid-cols-9 grid-flow-row gap-4'>
                         <div className='lg:col-span-7'>
                             <h1 className="text-2xl font-bold inter text-customBrown">

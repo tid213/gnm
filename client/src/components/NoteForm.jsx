@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
-import closeSquare from '../images/close-square.svg';
+import closeImage from '../images/x.svg';
 
 const NoteForm = ({session, closeButton}) => {
   const [noteType, setNoteType] = useState('Garden');
@@ -85,7 +85,7 @@ const NoteForm = ({session, closeButton}) => {
 
   return (
     <div className='relative inter w-full mt-12 max-w-md lg:w-96 mx-auto p-6 bg-white rounded-lg shadow-md border border-gray-200'>
-        <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-2 top-2 cursor-pointer'><img src={closeSquare} className='h-8 w-8 '></img></div>
+        <div onClick={()=> closeButton(true)} className='absolute text-xl font-bold right-2 top-2 cursor-pointer'><img src={closeImage} className='h-4 w-4 '></img></div>
         <h2 className='text-2xl font-normal mb-4 text-customMidGreen'>Write Note</h2>
         <form onSubmit={handleSubmit}>
       <div className='mb-4'>
