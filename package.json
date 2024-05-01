@@ -8,6 +8,6 @@
       "dev": "concurrently \"npm run start\" \"npm run client\""
     },
     "dependencies": {
-      "express": "^10.5.0"
+      "express": "^4.17.1"
     }
 }
