@@ -159,7 +159,6 @@ const PlantForm = ({ plantId, session, closeButton, editButton }) => {
       className="mt-4 lg:mt-0 w-full lg:col-span-2 bg-customOrange hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
       type="submit">Save Plant
       </button>
-      {plantId ? <div className="mt-4 lg:mt-0 w-full lg:col-span-2 bg-black hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">Delete Plant</div> : ""}
     </form>
     </div>
   );

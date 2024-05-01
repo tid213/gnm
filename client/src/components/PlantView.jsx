@@ -7,14 +7,15 @@ import editImage from '../images/edit.svg'
 import shearsImage from '../images/shears.png';
 import fertilizerImage from '../images/fertilizer.png';
 import AddImageIcon from '../images/add-image.png';
-import closeSquare from '../images/close-square.svg';
+import trashImage from '../images/trash.svg';
 import closeImage from '../images/x.svg';
 
 function PlantView({session, plantID, closeButton, editButton, bgColor}){
 
     const [plantData, setPlantData] = useState();
     const [dateAndImageView, setDateAndImageView] = useState("image");
-    console.log(bgColor)
+    const [showConfirmation, setShowConfirmation] = useState(false);
+
     useEffect(()=>{
         const fetchPlantData = async () =>{
             try{
@@ -61,6 +62,28 @@ function PlantView({session, plantID, closeButton, editButton, bgColor}){
         } else if(dateAndImageView === "upload"){
             return(<ImageForm close={dateAndImage} imageForId={plantID} imageFor={"plant"} />)
         }
+    }
+
+    const refreshPage = ()=>{
+        window.location.reload();
+       }
+
+    const handleDelete = async (e) => {
+        e.preventDefault();
+
+        try {
+            const { error } = await supabase
+            .from('plants')
+            .delete()
+            .eq('id', plantID)
+            if(error){
+                throw error;
+            }
+
+        } catch (error){
+            console.error('Error saving note data:', error.message);
+        } refreshPage();
+
     }
 
     return(
@@ -116,6 +139,22 @@ function PlantView({session, plantID, closeButton, editButton, bgColor}){
                                 <img src={AddImageIcon} className='w-4 h-4'></img>
                                 <p className='text-normal font-normal text-black p-2'>Image</p>
                             </div>
+                            <div onClick={() => setShowConfirmation(true)}
+                                className='lg:w-fit col-span-1 w-full m-auto lg:mt-1 lg:p-0 p-1 mt-1 bg-white lg:bg-transparent w-auto cursor-pointer flex justify-center items-center border lg:border-0 hover:border-b-2 lg:shadow-none shadow-md'>
+                                <img src={trashImage} className='w-4 h-4'></img>
+                                <p className='text-normal font-normal text-black p-2'>Delete</p>
+                            </div>
+                            {showConfirmation && (
+                                <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
+                                    <div className="bg-white p-8 rounded-md shadow-lg">
+                                        <p>Are you sure you want to delete?</p>
+                                        <div className="flex justify-end mt-4">
+                                            <button onClick={handleDelete} className="px-4 py-2 mr-2 bg-red-500 text-white rounded-md">Yes</button>
+                                            <button onClick={() => setShowConfirmation(false)} className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md">No</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                 </div>
             </div>: ""}
