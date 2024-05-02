@@ -145,10 +145,6 @@ const fetchUserPlants = async (userId) => {
       }
 };
 
-const fetchUsernotes = async (userId) => {
-
-};
-
 app.get('/notebook/:id', async (req, res) => {
     const shareId = req.params.id;
     const getUserId = await fetchUserId(shareId);
@@ -163,8 +159,9 @@ app.get('/notebook/:id', async (req, res) => {
 
 });
 
-app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+app.use(express.static(path.join(__dirname, 'client', 'build')));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"))
 });
 
 app.listen(process.env.PORT || 8000, () => {
