@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get('/message', (req, res) => {
     res.json({ message: "Hello from server!" });
@@ -160,6 +161,10 @@ app.get('/notebook/:id', async (req, res) => {
         res.json({data: "API call works no data"})
     }
 
+});
+
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 app.listen(process.env.PORT || 8000, () => {
